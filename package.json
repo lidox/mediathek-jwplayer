@@ -1,0 +1,23 @@
+{
+  "name": "mediathek-jwplayer",
+  "version": "1.0.0",
+  "main": "server2.js",
+  "scripts": {
+    "test": "t",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lidox/mediathek-jwplayer.git"
+  },
+  "author": "Artur Schaefer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lidox/mediathek-jwplayer/issues"
+  },
+  "homepage": "https://github.com/lidox/mediathek-jwplayer#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

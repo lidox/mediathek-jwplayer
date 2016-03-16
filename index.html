@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Mediathek jwPlayer</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <style>
+        body { padding-top:50px; }
+    </style>
+    
+    <script src="//localhost:1337/jwplayer/jwplayer.js"></script>
+    <script>jwplayer.key="l1I4qfPf1ZS1o4t4rTNYK+3dolhmm/M2vSC6Vg==";</script>
+    
+</head>
+<body>
+   
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Mediathek JW-Player Testing</h2>
+        </div>
+        
+        <div id="myElement">Loading the player...</div>
+            <script src="//localhost:1337/jwplayer/jwplayer.js"></script>
+    <script>jwplayer.key="l1I4qfPf1ZS1o4t4rTNYK+3dolhmm/M2vSC6Vg==";</script>
+        <script type="text/javascript">
+
+            var playerInstance = jwplayer('container');
+            playerInstance.setup({
+                file: "//content.jwplatform.com/videos/3XnJSIm4-640.mp4",
+                image: "//content.jwplatform.com/thumbs/3XnJSIm4-640.jpg",
+                width: 640,
+                height: 270,
+                logo: {
+                    file: "//content.jwplatform.com/watermarks/gdz4zR4a.png",
+                    link: "//www.blender.org/foundation/"
+                },
+                abouttext: 'Video Available at Blender.org',
+                aboutlink: 'http://www.blender.org'
+            });
+</script>
+        
+    </div>
+    
+</body>
+</html>
