@@ -5,6 +5,7 @@
     <title>Mediathek jwPlayer</title>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link href="/skins/bekle.css" rel="stylesheet" type="text/css" />
     <style>
         body { padding-top:50px; }
     </style>
@@ -26,6 +27,15 @@
 
             var playerInstance = jwplayer('container');
             playerInstance.setup({
+                // hhu skin
+                skin: {
+                    name: "bekle",
+                    
+                    active: "blue",
+                    inactive: "white",
+                    background: "black"
+                    
+                },
                 
                 // video quality
                 //file: "//content.jwplatform.com/videos/3XnJSIm4-640.mp4",
