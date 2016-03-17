@@ -26,7 +26,19 @@
 
             var playerInstance = jwplayer('container');
             playerInstance.setup({
-                file: "//content.jwplatform.com/videos/3XnJSIm4-640.mp4",
+                //file: "//content.jwplatform.com/videos/3XnJSIm4-640.mp4",
+                sources: [{
+                   file: "//content.jwplatform.com/videos/C4lp6Dtd-1280.mp4",
+                   label: "720p HD"
+                },{
+                   file: "//content.jwplatform.com/videos/C4lp6Dtd-640.mp4",
+                   label: "360p SD",
+                   "default": "true"
+                },{
+                    file: "//content.jwplatform.com/videos/C4lp6Dtd-640.mp4",
+                    label: "180p Web"
+                }],
+
                 image: "//content.jwplatform.com/thumbs/3XnJSIm4-640.jpg",
                 width: 640,
                 height: 270,
