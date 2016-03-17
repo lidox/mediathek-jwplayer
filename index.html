@@ -46,17 +46,27 @@
                 height: 270,
                 
                 // thumbnails + captions
-                tracks: [{ 
+                tracks: [
+                {
+                    //chapters
+                    file: '/assets/chapters.vtt',
+                    kind: 'chapters' 
+                },{ 
+                    // thumbnails
                     file: "/assets/thumbnails.vtt", 
                     kind: "thumbnails"
                 },{ 
+                    // captions
                     file: "/assets/captions-en.vtt", 
                     label: "English",
-                    kind: "captions", 
+                    kind: "captions"
                 },{ 
+                    // captions
                     file: "/assets/captions-de.vtt", 
                     label: "Deutsch",
                     kind: "captions", 
+                    //"default": true 
+                 
                 }],
                 
                 logo: {
