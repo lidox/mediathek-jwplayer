@@ -26,6 +26,8 @@
 
             var playerInstance = jwplayer('container');
             playerInstance.setup({
+                
+                // video quality
                 //file: "//content.jwplatform.com/videos/3XnJSIm4-640.mp4",
                 sources: [{
                    file: "//content.jwplatform.com/videos/C4lp6Dtd-1280.mp4",
@@ -43,15 +45,23 @@
                 width: 640,
                 height: 270,
                 
-                // thumbnails
+                // thumbnails + captions
                 tracks: [{ 
                     file: "/assets/thumbnails.vtt", 
                     kind: "thumbnails"
+                },{ 
+                    file: "/assets/captions-en.vtt", 
+                    label: "English",
+                    kind: "captions", 
+                },{ 
+                    file: "/assets/captions-de.vtt", 
+                    label: "Deutsch",
+                    kind: "captions", 
                 }],
                 
                 logo: {
                     file: "//mediathek.hhu.de/images/uni_duesseldorf_logo.png",
-                    link: "//www.blender.org/foundation/"
+                    link: "//mediathek.hhu.de"
                 },
                 abouttext: 'Video Available at the hhu mediathek',
                 aboutlink: 'http://mediathek.hhu.de'
