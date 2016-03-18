@@ -90,8 +90,18 @@
                     link: "//mediathek.hhu.de"
                 },
                 abouttext: 'Video Available at the hhu mediathek',
-                aboutlink: 'http://mediathek.hhu.de'
-            });
+                aboutlink: 'http://mediathek.hhu.de',
+               
+                plugins:{
+		              "http://dev.powered-by-haiku.co.uk/solutions/tracky/code/tracky.js":{}
+	            },
+                                 
+	             width:"50%",
+	            "aspectratio":"16:9"
+                                 
+                                
+                                
+                  });
         </script>
         
     </div>
@@ -105,5 +115,13 @@
     </a>
     </h3>
     
+    <h3>
+    <a href="#" onclick="playerInstance.plugins.tracky.seekToNextChapter();" class="watch-chapters-list-anchor">				<span class="watch-chapters-chapter">									
+    <span class="watch-chapters-chapternumber">Springe:</span>		
+    <span class="watch-chapters-chaptertext">zum nächsten Chapter</span>
+    </span>														
+    </a>
+    </h3>
+
 </body>
 </html>
