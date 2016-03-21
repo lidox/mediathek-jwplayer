@@ -111,8 +111,6 @@
 	             width:"50%",
 	            "aspectratio":"16:9"
                                  
-                                
-                                
                   });
         </script>
 		
@@ -127,6 +125,25 @@
 				console.log('PLAY');
 				document.getElementById('status').innerHTML = 'PLAY clicked';
 			});
+			
+		// 10 sek button
+			if (jwplayer().getRenderingMode() == "html5"){
+            	playerInstance.addButton(
+                "/icons/icon_dir.png",
+                "10", 
+                function() {
+				   var time = playerInstance.getPosition() - 10;
+				   if(time < 0) { time = 0; }
+				   playerInstance.seek(time);
+                },
+                "button"
+                );        
+             }
+             else{
+                alert("your browser doesn't support HTML5，cant't change speed.");
+              }
+             console.log("state is :"+playerInstance.getState());
+                
 		</script>
 							
         
