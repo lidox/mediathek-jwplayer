@@ -16,27 +16,39 @@
 </head>
 <body>
    
+	
     <div class="mycontainer">
         <div class="jumbotron">
             <h2>Mediathek JW-Player Testing</h2>
         </div>
         
+		<h1><label id="status"></label></h1>
         <div id="container">Loading the player...</div>
-
+		
+		
         <script type="text/javascript">
 
             var playerInstance = jwplayer('container');
             playerInstance.setup({
                 // hhu skin. skin css linked at the top
-                skin: {
-                    name: "bekle",
-                    
-                    active: "blue",
-                    inactive: "white",
-                    background: "black"
-                    
-                },
+                /*skin: {
+                    name: "bekle"    
+                },*/
                 
+				
+				/* add next and previos chapter
+				playlist:[{
+						title: "This has Chapters",
+						image: "http://content.jwplatform.com/thumbs/q1fx20VZ-640.jpg",
+  						file: "http://content.jwplatform.com/videos/q1fx20VZ-640.mp4",
+  					tracks: [{ 
+    					file: 'http://content.jwplatform.com/tracks/XtwSLSdq.txt',
+    					kind: 'chapters'
+  					}]
+				}],
+				*/
+				
+				
                 // video quality
                 //file: "//content.jwplatform.com/videos/3XnJSIm4-640.mp4",
                 sources: [{
@@ -103,6 +115,20 @@
                                 
                   });
         </script>
+		
+		<script type="text/javascript">
+			document.getElementById("status").style.color = "red";
+			playerInstance.onPause(function(){
+				console.log('PAUSE');
+				document.getElementById('status').innerHTML = 'PAUSE clicked';
+			});
+			
+			playerInstance.onPlay(function(){
+				console.log('PLAY');
+				document.getElementById('status').innerHTML = 'PLAY clicked';
+			});
+		</script>
+							
         
     </div>
     
