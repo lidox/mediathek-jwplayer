@@ -52,6 +52,58 @@
 <meta name="twitter:description" content="Systematische Bildinterpretation konventioneller Röntgenaufnahmen des Thorax " />
 <meta name="twitter:image" content="http://mediathek.hhu.de/thumbs/6be80f39-e59d-4ce5-b67b-f87def9c703f/thumb_000.jpg" />
 
+	<style>
+		#sprite {
+			width: 120px;
+			height: 53px;
+			margin: 30px auto;
+			background-image: url(/assets/thumbnails.jpg);
+		}
+	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			var frameWidth = 120;
+			var frameHeight = 53;
+			var spriteWidth = 480;
+			var spriteHeight = 1060;
+			var spriteElement = document.getElementById("sprite");
+
+			var curPx = 0;
+			var curPy = 0;
+			var ti;
+
+			function animateSprite() {
+
+				spriteElement.style.backgroundPosition = curPx + 'px ' + curPy + 'px';
+				curPx = curPx + frameWidth;
+				// 480 × 1060
+				if (curPx >= spriteWidth) {
+					curPx = 0;
+					if (curPy >= spriteHeight) {
+						curPy += frameHeight;
+					}
+				}
+
+				ti = setTimeout(animateSprite, 1000);
+
+			}
+
+			animateSprite();
+
+			$("#sprite").mouseout(function() {
+				clearTimeout(ti);
+			});
+
+			$("#sprite").mouseover(function() {
+				//animateSprite();
+				//ti = setTimeout(animateSprite, 1000);
+			});
+
+		});
+	</script>
+			
 </head>
 
 <body dir="ltr">
@@ -396,6 +448,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$mt_content_placeholder$videoi
         }
     });
 </script>
+						
+						
 
 
 		<!-- Tabs: description, chapters, embed, ... //-->
@@ -474,9 +528,10 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$mt_content_placeholder$videoi
 							<li class="video-list-item">
 								<a class="video-list-item-anchor" href="http://mediathek.hhu.de/watch/df7fa1b7-971c-49c8-981d-becd774a1b9d">
 									<span class="video-list-thumb-container">
-										<span class="video-list-thumb-innercontainer">
-											<img alt="Thumbnail" src="http://mediathek.hhu.de/thumbs/df7fa1b7-971c-49c8-981d-becd774a1b9d/thumb_000.jpg" class="video-list-thumb" />
-										</span>
+										<div class="video-list-thumb-innercontainer" id="sprite" >
+											<!-- TODO -->
+											<!--<img alt="Thumbnail" src="/assets/thumbnails.jpg" class="video-list-thumb" /> -->
+										</div>
 									</span>
 									<span class="video-list-title" title="Modul 8 streifig-retikuläre Lungenveränderungen" dir="ltr">Modul 8 streifig-retikul...</span>
 									<div class="video-list-wrapper">
