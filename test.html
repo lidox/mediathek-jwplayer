@@ -71,34 +71,56 @@
 			var spriteElement = document.getElementById("sprite");
 
 			var curPx = 0;
-			var curPy = 0;
+	
 			var ti;
 
+            var defaultThumbnailNr = sprite.dataset.hasOwnProperty('thumbnail') ? sprite.dataset.thumbnail : 0;
+            spriteElement.style.backgroundPosition = (defaultThumbnailNr * frameWidth) + 'px ' + 0 + 'px';
+            
 			function animateSprite() {
 
-				spriteElement.style.backgroundPosition = curPx + 'px ' + curPy + 'px';
+				spriteElement.style.backgroundPosition = curPx + 'px ' + 0 + 'px';
 				curPx = curPx + frameWidth;
 				// 480 × 1060
 				if (curPx >= spriteWidth) {
 					curPx = 0;
-					if (curPy >= spriteHeight) {
-						curPy += frameHeight;
-					}
 				}
 
 				ti = setTimeout(animateSprite, 1000);
 
 			}
-
-			animateSprite();
+            
+            function getImageNr(imageLength, thumbnailLength, currentMousePos){
+                var current = currentMousePos * imageLength;
+                var min = current;
+                var imageNr = 0;
+                var j = thumbnailLength;
+                var maxImageAmount = (imageLength / thumbnailLength)
+                for(var i=0; i<= maxImageAmount; i++) {
+                    var now = Math.abs((current - j));
+                    if(now < min){
+                        min = now;
+                        imageNr = i;
+                    }
+                    j += thumbnailLength;
+                }
+                imageNr += 1;
+                console.log('bild an pos ' + imageNr)
+                return imageNr;
+            }
+            
+            sprite.onmousemove = function(event){
+                var curPx = getImageNr(spriteWidth, frameWidth, event.offsetX/this.offsetWidth)
+                spriteElement.style.backgroundPosition = (curPx * frameWidth)  + 'px ' + 0 + 'px';
+            };
 
 			$("#sprite").mouseout(function() {
-				clearTimeout(ti);
+				//clearTimeout(ti);
 			});
 
 			$("#sprite").mouseover(function() {
 				//animateSprite();
-				//ti = setTimeout(animateSprite, 1000);
+                
 			});
 
 		});
@@ -528,7 +550,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$mt_content_placeholder$videoi
 							<li class="video-list-item">
 								<a class="video-list-item-anchor" href="http://mediathek.hhu.de/watch/df7fa1b7-971c-49c8-981d-becd774a1b9d">
 									<span class="video-list-thumb-container">
-										<div class="video-list-thumb-innercontainer" id="sprite" >
+										<div class="video-list-thumb-innercontainer" id="sprite" style="background-position: 0px 0px;" data-thumbnail="3" >
 											<!-- TODO -->
 											<!--<img alt="Thumbnail" src="/assets/thumbnails.jpg" class="video-list-thumb" /> -->
 										</div>
