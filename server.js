@@ -9,12 +9,17 @@ app.use(express.static(__dirname + '/public'));
 
 // index.html
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname + '/view/index.html'));
 });
 
 // test.html
 app.get('/test', function(req, res) {
-    res.sendFile(path.join(__dirname + '/test.html'));
+    res.sendFile(path.join(__dirname + '/view/test.html'));
+});
+
+// test.html
+app.get('/thumbnail', function(req, res) {
+    res.sendFile(path.join(__dirname + '/view/HHUMediathek_Startseite.htm'));
 });
 
 app.listen(port, function () {

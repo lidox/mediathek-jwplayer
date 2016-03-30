@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" style=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktuelle Videos - My ASP.NET Application</title>
+    <link href="HHUMediathek_Startseite-Dateien/bootstrap.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/site.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/hhud.css" rel="stylesheet">
+
+    <link href="HHUMediathek_Startseite-Dateien/core.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/resizable.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/selectable.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/accordion.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/autocomplete.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/button.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/dialog.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/slider.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/tabs.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/datepicker.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/progressbar.css" rel="stylesheet">
+<link href="HHUMediathek_Startseite-Dateien/theme.css" rel="stylesheet">
+
+    <script src="HHUMediathek_Startseite-Dateien/modernizr-2.js"></script>
+
+    <script src="HHUMediathek_Startseite-Dateien/jquery-2.js"></script>
+
+    <script src="HHUMediathek_Startseite-Dateien/jquery-ui-1.js"></script>
+
+    <script src="HHUMediathek_Startseite-Dateien/jquery_003.js"></script>
+<script src="HHUMediathek_Startseite-Dateien/jquery_002.js"></script>
+<script src="HHUMediathek_Startseite-Dateien/jquery.js"></script>
+
+    <script src="HHUMediathek_Startseite-Dateien/bootstrap.js"></script>
+<script src="HHUMediathek_Startseite-Dateien/respond.js"></script>
+
+    <script type="text/javascript">
+    $(function () {
+        $("#search-modal").dialog({
+            autoOpen: false,
+            modal: true,
+            closeOnEscape: true,
+            dialogClass: "search-dialog",
+            draggable: false,
+            position: { my: "center top", at: "center top", of: window },
+            resizable: false,
+            minHeight: 50,
+            width: $(window).width()
+        });
+
+        $('#search-modal-opener').click(function () {
+            if ($('#search-modal').dialog("isOpen")) {
+                $('#search-modal').dialog('close');
+            }
+            else {
+                $('#search-modal').dialog('open');
+                $("#searchbox").focus();
+            }
+        });
+
+        $('body').on("click", ".ui-widget-overlay", function () {
+            $('#search-modal').dialog('close');
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-burger navbar-toggle" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-search visible-xs-block hidden-sm hidden-md hidden-lg">
+                    <button id="search-modal-opener" type="button" class="search-button btn">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+                <a href="http://localhost:49911/" title="Home" class="navbar-brand logo-anchor">
+                    <img alt="HHU Mediathek Logo" src="HHUMediathek_Startseite-Dateien/hhu_logo_2d.png" class="logo-image">
+                </a>
+                <a class="navbar-brand application-title" href="http://localhost:49911/">HHU Mediathek</a>
+            </div>
+
+            <div id="navbar-main" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="visible-xs-block hidden-sm hidden-md hidden-lg">
+                        <a href="http://localhost:49911/" title="Home">
+                            <i class="glyphicon glyphicon-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="visible-xs-block hidden-sm hidden-md hidden-lg">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" role="button"><i class="glyphicon glyphicon-list"></i> Kategorien <i class="caret"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class="glyphicon glyphicon glyphicon-list"></i> Vorlesungen</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-list"></i> Lehrvideos</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-list"></i> Tutorials</a></li>
+                        </ul>
+                    </li>
+                    <li class="visible-xs-block hidden-sm hidden-md hidden-lg">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" role="button"><i class="glyphicon glyphicon-registration-mark"></i> Rechtliches <i class="caret"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="http://localhost:49911/Home/About"><i class="glyphicon glyphicon glyphicon-list"></i> Nutzungsrichtlinien</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-list"></i> Datenschutz</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-list"></i> Impressum</a></li>
+                        </ul>
+                    </li>
+                    <li class="visible-xs-block hidden-sm hidden-md hidden-lg">
+                        <a href="http://localhost:49911/Home/Contact" title="Kontakt">
+                            <i class="glyphicon glyphicon-envelope"></i> Kontakt
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="imaginary_container" class="hidden-xs">
+                    <div class="input-group stylish-input-group">
+                        <input class="form-control" placeholder="Suche..." type="text">
+                        <span class="input-group-addon">
+                            <button type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                
+
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-login">
+            <a id="loginLink" href="http://localhost:49911/Account/Login"><span class="glyphicon glyphicon-log-in"></span> Anmelden</a>
+            <!--<a href="/Account/Login" id="loginLink">Anmelden</a>-->
+        </li>
+    </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        
+
+
+<!--
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>-->
+
+
+<a href="#">
+    <h2>Aktuelle Videos »</h2>
+    <!-- use glyphicon instead? <span class="glyphicon glyphicon-menu-right"></span>-->
+</a>
+
+<div class="container-fluid container-video">
+    <div class="row row-video">
+        <!-- video item -->
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
+            <div class="panel panel-video">
+                <div class="panel-video-thumbnail">
+                    <!--Mopho script for animation? http://pixelentity.com/previews/components/mopho/ -->
+                    <!--
+                        <a class="peMopho"
+				           data-preview="video/girl.jpg"
+				           data-target="prettyphoto"
+				           data-size="640x360"
+				           href="http://pixelentity.com/previews/assets/video/video.mp4"
+				           data-formats="webm,ogv,mpeg4"
+				           data-poster="img/example02/local.jpg"
+				           title="Local HTML5 Video"
+				           data-description="Big Bucks Bunny">
+					        <img src="img/example02/girl.jpg" alt="animated thumbnail" />
+				        </a>
+                        Vorschaubild: Breite 1120 px, 5 Bilder, je 224 px, Original 640x360
+                    -->
+                    <a href="#">
+                        <img src="HHUMediathek_Startseite-Dateien/thumb_000.jpg" class="video-thumbnail">
+                        <span class="label label-default video-time">01:25:49</span>
+                    </a>
+                </div>
+                <div class="panel-heading panel-video-title">
+                    <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                </div>
+                <div class="dropdown panel-video-menu">
+                    <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu video-options" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i> Kanal hinzufügen</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> Teilen</a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-video-channel">
+                    <p>Kanal: <a href="#">Heinrich-Heine-Kinderuniversität</a></p>
+                </div>
+                <div class="panel-footer panel-video-footer">
+                    <p><i class="glyphicon glyphicon-user"></i> Ulrich Wickert | <i class="glyphicon glyphicon-calendar"></i> 27.01.2016 <!--| <i class="glyphicon glyphicon-time"></i> vor 7 Wochen--> | <a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /video item -->
+        <!-- video item -->
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
+            <div class="panel panel-video">
+                <div class="panel-video-thumbnail">
+                    <a href="#">
+                        <img src="HHUMediathek_Startseite-Dateien/thumb_000_002.jpg" class="video-thumbnail">
+                        <span class="label label-default video-time">01:25:49</span>
+                        <span class="label label-default video-locked"><i class="glyphicon glyphicon-lock"></i></span>
+                    </a>
+                </div>
+                <div class="panel-heading panel-video-title">
+                    <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                </div>
+                <div class="dropdown panel-video-menu">
+                    <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu video-options" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i> Kanal hinzufügen</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> Teilen</a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-video-channel">
+                    <p>Kanal: <a href="#">Heinrich-Heine-Kinderuniversität</a></p>
+                </div>
+                <div class="panel-footer panel-video-footer">
+                    <p><i class="glyphicon glyphicon-user"></i> Ulrich Wickert | <i class="glyphicon glyphicon-calendar"></i> 27.01.2016 <!--| <i class="glyphicon glyphicon-time"></i> vor 7 Wochen--> | <a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /video item -->
+        <!-- video item -->
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
+            <div class="panel panel-video">
+                <div class="panel-video-thumbnail">
+                    <a href="#">
+                        <img src="HHUMediathek_Startseite-Dateien/thumb_001_002.jpg" class="video-thumbnail">
+                        <span class="label label-default video-time">01:25:49</span>
+                    </a>
+                </div>
+                <div class="panel-heading panel-video-title">
+                    <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                </div>
+                <div class="dropdown panel-video-menu">
+                    <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu video-options" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i> Kanal hinzufügen</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> Teilen</a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-video-channel">
+                    <p>Kanal: <a href="#">Heinrich-Heine-Kinderuniversität</a></p>
+                </div>
+                <div class="panel-footer panel-video-footer">
+                    <p><i class="glyphicon glyphicon-user"></i> Ulrich Wickert | <i class="glyphicon glyphicon-calendar"></i> 27.01.2016 <!--| <i class="glyphicon glyphicon-time"></i> vor 7 Wochen--> | <a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /video item -->
+        <!-- video item -->
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
+            <div class="panel panel-video">
+                <div class="panel-video-thumbnail">
+                    <a href="#">
+                        <img src="HHUMediathek_Startseite-Dateien/thumb_000_003.jpg" class="video-thumbnail">
+                        <span class="label label-default video-time">01:25:49</span>
+                    </a>
+                </div>
+                <div class="panel-heading panel-video-title">
+                    <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                </div>
+                <div class="dropdown panel-video-menu">
+                    <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu video-options" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i> Kanal hinzufügen</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> Teilen</a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-video-channel">
+                    <p>Kanal: <a href="#">Heinrich-Heine-Kinderuniversität</a></p>
+                </div>
+                <div class="panel-footer panel-video-footer">
+                    <p><i class="glyphicon glyphicon-user"></i> Ulrich Wickert | <i class="glyphicon glyphicon-calendar"></i> 27.01.2016 <!--| <i class="glyphicon glyphicon-time"></i> vor 7 Wochen--> | <a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /video item -->
+        <!-- video item -->
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
+            <div class="panel panel-video">
+                <div class="panel-video-thumbnail">
+                    <a href="#">
+                        <img src="HHUMediathek_Startseite-Dateien/thumb_002.jpg" class="video-thumbnail">
+                        <span class="label label-default video-time">01:25:49</span>
+                    </a>
+                </div>
+                <div class="panel-heading panel-video-title">
+                    <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                </div>
+                <div class="dropdown panel-video-menu">
+                    <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu video-options" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i> Kanal hinzufügen</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> Teilen</a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-video-channel">
+                    <p>Kanal: <a href="#">Heinrich-Heine-Kinderuniversität</a></p>
+                </div>
+                <div class="panel-footer panel-video-footer">
+                    <p><i class="glyphicon glyphicon-user"></i> Ulrich Wickert | <i class="glyphicon glyphicon-calendar"></i> 27.01.2016 <!--| <i class="glyphicon glyphicon-time"></i> vor 7 Wochen--> | <a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /video item -->
+        <!-- video item -->
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
+            <div class="panel panel-video">
+                <div class="panel-video-thumbnail">
+                    <a href="#">
+                        <img src="HHUMediathek_Startseite-Dateien/thumb_005.jpg" class="video-thumbnail">
+                        <span class="label label-default video-time">01:25:49</span>
+                    </a>
+                </div>
+                <div class="panel-heading panel-video-title">
+                    <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                </div>
+                <div class="dropdown panel-video-menu">
+                    <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu video-options" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i> Kanal hinzufügen</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> Teilen</a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-video-channel">
+                    <p>Kanal: <a href="#">Heinrich-Heine-Kinderuniversität</a></p>
+                </div>
+                <div class="panel-footer panel-video-footer">
+                    <p><i class="glyphicon glyphicon-user"></i> Ulrich Wickert | <i class="glyphicon glyphicon-calendar"></i> 27.01.2016 <!--| <i class="glyphicon glyphicon-time"></i> vor 7 Wochen--> | <a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /video item -->
+        <!-- video item -->
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
+            <div class="panel panel-video">
+                <div class="panel-video-thumbnail">
+                    <a href="#">
+                        <img src="HHUMediathek_Startseite-Dateien/thumb_001.jpg" class="video-thumbnail">
+                        <span class="label label-default video-time">01:25:49</span>
+                    </a>
+                </div>
+                <div class="panel-heading panel-video-title">
+                    <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                </div>
+                <div class="dropdown panel-video-menu">
+                    <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu video-options" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i> Kanal hinzufügen</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> Teilen</a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-video-channel">
+                    <p>Kanal: <a href="#">Heinrich-Heine-Kinderuniversität</a></p>
+                </div>
+                <div class="panel-footer panel-video-footer">
+                    <p><i class="glyphicon glyphicon-user"></i> Ulrich Wickert | <i class="glyphicon glyphicon-calendar"></i> 27.01.2016 <!--| <i class="glyphicon glyphicon-time"></i> vor 7 Wochen--> | <a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /video item -->
+        <!-- video item -->
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
+            <div class="panel panel-video">
+                <div class="panel-video-thumbnail">
+                    <a href="#">
+                        <img src="HHUMediathek_Startseite-Dateien/thumb_005_002.jpg" class="video-thumbnail">
+                        <span class="label label-default video-time">01:25:49</span>
+                    </a>
+                </div>
+                <div class="panel-heading panel-video-title">
+                    <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                </div>
+                <div class="dropdown panel-video-menu">
+                    <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu video-options" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i> Kanal hinzufügen</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-share"></i> Teilen</a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-video-channel">
+                    <p>Kanal: <a href="#">Heinrich-Heine-Kinderuniversität</a></p>
+                </div>
+                <div class="panel-footer panel-video-footer">
+                    <p><i class="glyphicon glyphicon-user"></i> Ulrich Wickert | <i class="glyphicon glyphicon-calendar"></i> 27.01.2016 <!--| <i class="glyphicon glyphicon-time"></i> vor 7 Wochen--> | <a href="#"><i class="glyphicon glyphicon-edit"></i> Bearbeiten</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- /video item -->
+
+
+    </div>
+</div>
+
+<!--
+<div>
+    <p>Filter <span class="badge">5</span></p>
+    <div class="list-group">
+        <a href="#" class="list-group-item">First item</a>
+        <a href="#" class="list-group-item">Second item</a>
+        <a href="#" class="list-group-item">Third item</a>
+    </div>
+</div>
+
+
+<h2>Welcome unbekannter Nutzer</h2>
+<h3>Values from Identity</h3>
+<table>
+    <tr>
+        <th>
+            IsAuthenticated:
+        </th>
+        <td>
+            False
+        </td>
+    </tr>
+    <tr>
+        <th>
+            UPN:
+        </th>
+        <td>
+            
+        </td>
+    </tr>
+</table>
+<h3>Claims from ClaimsIdentity</h3>
+
+-->
+<!--<table>
+    <tr>
+        <th>
+            Claim Type
+        </th>
+        <th>
+            Claim Value
+        </th>
+        <th>
+            Value Type
+        </th>
+        <th>
+            Subject Name
+        </th>
+        <th>
+            Issuer Name
+        </th>
+    </tr>
+        <tr>
+            <td>
+                http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                http://www.w3.org/2001/XMLSchema#string
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                LOCAL AUTHORITY
+            </td>
+        </tr>
+</table>-->
+
+        <hr>
+        <footer>
+            <p>© 2016 - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    
+
+    
+
+
+    
+    
+<div aria-labelledby="ui-id-1" aria-describedby="search-modal" role="dialog" tabindex="-1" style="display: none;" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front search-dialog"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-id-1">&nbsp;</span><button class="ui-dialog-titlebar-close" type="button"></button></div><div class="ui-dialog-content ui-widget-content" id="search-modal">
+        <a href="http://localhost:49911/" title="Home" class="navbar-brand logo-anchor">
+            <img alt="HHU Mediathek Logo" src="HHUMediathek_Startseite-Dateien/hhu_logo_2d.png" class="logo-image">
+        </a>
+        <div class="search-modal-container">
+            <div class="search-group">
+                <input id="searchbox" class="form-control" placeholder="Suche..." type="text">
+                <button type="button" class="search-button btn">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </div>
+    </div></div></body></html>
