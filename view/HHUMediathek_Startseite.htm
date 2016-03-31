@@ -71,59 +71,8 @@
 			margin: 30px auto;
 		}
 	</style>
-	
-	<script type="text/javascript">
-		window.onload = function() {
-		   var imageWidth = 0;
-			
-		   function getImageNr(imageWidth, thumbnailLength, currentMousePos){
-                var current = currentMousePos * imageWidth;
-                var min = current;
-                var imageNr = 0;
-                var j = thumbnailLength;
-                var maxImageAmount = (imageWidth / thumbnailLength)
-                for(var i=0; i<= maxImageAmount; i++) {
-                    var now = Math.abs((current - j));
-                    if(now < min){
-                        min = now;
-                        imageNr = i;
-                    }
-                    j += thumbnailLength;
-                }
-                imageNr += 1;
-                //console.log('image position ' + imageNr + ' . Thus px nr. = ' + (imageNr * thumbnailLength));
-                return imageNr;
-            }
-			
-			var videoDiv = document.getElementsByClassName('video-thumbnail2');
-			for (var i = 0; i < videoDiv.length; ++i) {
-			//$(".video-thumbnail2").each(function() {  
-				var defaultThumbnailNr = videoDiv[i].dataset.hasOwnProperty('thumbnail') ? videoDiv[i].dataset.thumbnail : 1;
-				var img = videoDiv[i].dataset.hasOwnProperty('img') ? videoDiv[i].dataset.img : 1;
-				videoDiv[i].style.backgroundImage = 'url(' + img + '';
-				
-				//
-			    var imageSrc = videoDiv[i].style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];     
-    			var image = new Image();
-    			image.src = imageSrc;
-				var imageWidth = image.width;			
-				//
-				
-				 videoDiv[i].style.backgroundPosition = (imageWidth - (defaultThumbnailNr * videoDiv[i].offsetWidth)) + 'px ' + 0 + 'px';
-				
-				 videoDiv[i].onmousemove = function(event){
-                 	var curPx = getImageNr(imageWidth, this.offsetWidth, 1-(event.offsetX/this.offsetWidth) )
-                 	this.style.backgroundPosition = (curPx * this.offsetWidth)  + 'px ' + 0 + 'px';
-            	 };
-				
-				 videoDiv[i].onmouseout = function(event){
-				 	var defaultThumbnailNr = this.dataset.hasOwnProperty('thumbnail') ? this.dataset.thumbnail : 0;
-				 	this.style.backgroundPosition = (imageWidth - (defaultThumbnailNr * this.offsetWidth)) + 'px ' + 0 + 'px';
-            	 };
-				
-  			} 	
-		}
-	</script>
+
+	<script type="text/javascript" src="/js/video-thumbnails.js"></script>
 
 	
 </head>
