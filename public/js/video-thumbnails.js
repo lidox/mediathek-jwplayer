@@ -64,5 +64,5 @@ window.onload = function () {
 		divElem.style.backgroundImage = 'url(' + defaultBackgroundImg + ')';	
 		var thumbnailMapWidth = getThumbnailMapWidthByDivElement(divElem);			
 		setDivBackgroundByPosX(divElem, (thumbnailMapWidth - (defaultThumbnailNr * divElem.offsetWidth)));	
-    }
+    } 
 }
