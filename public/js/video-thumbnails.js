@@ -2,17 +2,34 @@
 window.onload = function () {
 	
 	var thumbnailDivList = document.getElementsByClassName('video-thumbnail2');
+	var maxThumbnailNr = 4;
 	
 	for (var i = 0; i < thumbnailDivList.length; ++i) {		
 		var defaultThumbnailNr = thumbnailDivList[i].dataset.hasOwnProperty('thumbnail') ? thumbnailDivList[i].dataset.thumbnail : 1;
 		var defaultBackgroundImg = thumbnailDivList[i].dataset.hasOwnProperty('img') ? thumbnailDivList[i].dataset.img : 1;
 		thumbnailDivList[i].style.backgroundImage = 'url(' + defaultBackgroundImg + ')';	
-		var thumbnailMapWidth = getThumbnailMapWidthByDivElement(thumbnailDivList[i]);			
-		setDivBackgroundByPosX(thumbnailDivList[i], (thumbnailMapWidth - (defaultThumbnailNr * thumbnailDivList[i].offsetWidth)));			
-			
+		var thumbnailMapWidth = getThumbnailMapWidthByDivElement(thumbnailDivList[i]);
+		
+		var xPosition = getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
+		setDivBackgroundByPosX(thumbnailDivList[i], xPosition);
+		
 		setOnMouseMoveListenerByDivElement(thumbnailDivList[i], thumbnailMapWidth);
 		setOnMouseOutListenerByDivElement(thumbnailDivList[i], thumbnailMapWidth);
   	} 	
+	
+	function getXPositionByDefaultThumbnailNr(defaultThumbnailNr) {
+		var xPosition = 0;
+		if(defaultThumbnailNr == 1){
+			xPosition = 0;
+		}
+		else if(defaultThumbnailNr == maxThumbnailNr){
+			xPosition =  100 + (100/maxThumbnailNr*2);
+		}
+		else{
+			xPosition = (100 / (maxThumbnailNr- defaultThumbnailNr) ) ;
+		}
+        return xPosition;
+    }
 	
 	function getImageNrByMousePosition(thumbnailMapWidth, thumbnailWidth, currentThumbnailMapPosition) {
         currentThumbnailMapPosition *= thumbnailMapWidth;
@@ -41,20 +58,28 @@ window.onload = function () {
     }
 	
 	function setDivBackgroundByPosX(divElem, xPosition) {
-		divElem.style.backgroundPosition = xPosition + 'px ' + 0 + 'px';
+		if(xPosition == 0){
+			divElem.style.backgroundPosition = xPosition + 'px ' + 0 + 'px';
+		}
+		else{
+			divElem.style.backgroundPosition = xPosition + '% ' + 0 + 'px';	
+		}
     }
 	
 	function setOnMouseMoveListenerByDivElement(divElem, thumbnailMapWidth) {
 		divElem.onmousemove = function(event) {
-			var curPx = getImageNrByMousePosition(thumbnailMapWidth, this.offsetWidth, 1-(event.offsetX/this.offsetWidth));
-			setDivBackgroundByPosX(this, curPx * this.offsetWidth);
+			var percentagePos = 2 * (event.offsetX/this.offsetWidth);
+			var curPx = getImageNrByMousePosition(thumbnailMapWidth, thumbnailMapWidth/maxThumbnailNr , percentagePos);
+			var xPosition = getXPositionByDefaultThumbnailNr(curPx);
+			setDivBackgroundByPosX(this, xPosition);
         };
     }
 	
 	function setOnMouseOutListenerByDivElement(divElem, thumbnailMapWidth) {
 		divElem.onmouseout = function(event) {
 		 	var defaultThumbnailNr = this.dataset.hasOwnProperty('thumbnail') ? this.dataset.thumbnail : 0;
-		 	setDivBackgroundByPosX( this, thumbnailMapWidth - (defaultThumbnailNr * this.offsetWidth));
+			var xPosition = getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
+			setDivBackgroundByPosX(this, xPosition);
         };
     }
 	
