@@ -65,13 +65,6 @@
     });
     </script>
 	
-	<script>
-		document.addEventListener("DOMContentLoaded", function(e){
-		var videoThumb = new VideoThumbnail('video-thumbnail2', 4);
-			console.log(videoThumb);
-		});
-	</script>
-	
 	<style>
 		.video-thumbnail2 {
 			width: 200%;
@@ -81,6 +74,13 @@
 			display:block;
 		}
 	</style>
+	
+	<script>
+		document.addEventListener("DOMContentLoaded", function(e){
+		var videoThumb = new VideoThumbnail('video-thumbnail2', 4);
+			console.log(videoThumb);
+		});
+	</script>
 
 	
 </head>
@@ -316,7 +316,8 @@
             <div class="panel panel-video">
                 <div class="panel-video-thumbnail">
                     <a href="#">
-                        <img src="HHUMediathek_Startseite-Dateien/thumb_002.jpg" class="video-thumbnail">
+                        <!-- <img src="HHUMediathek_Startseite-Dateien/thumb_002.jpg" class="video-thumbnail"> -->
+						<div class="video-thumbnail2" data-thumbnail="1" data-img="/assets/thumbnails2.jpg"></div>
                         <span class="label label-default video-time">01:25:49</span>
                     </a>
                 </div>
@@ -347,7 +348,8 @@
             <div class="panel panel-video">
                 <div class="panel-video-thumbnail">
                     <a href="#">
-                        <img src="HHUMediathek_Startseite-Dateien/thumb_005.jpg" class="video-thumbnail">
+						<div class="video-thumbnail2" data-thumbnail="2" data-img="/assets/thumbnails2.jpg"></div>
+                       
                         <span class="label label-default video-time">01:25:49</span>
                     </a>
                 </div>
@@ -378,7 +380,8 @@
             <div class="panel panel-video">
                 <div class="panel-video-thumbnail">
                     <a href="#">
-                        <img src="HHUMediathek_Startseite-Dateien/thumb_001.jpg" class="video-thumbnail">
+                  
+						<div class="video-thumbnail2" data-thumbnail="3" data-img="/assets/thumbnails2.jpg"></div>
                         <span class="label label-default video-time">01:25:49</span>
                     </a>
                 </div>
@@ -409,7 +412,7 @@
             <div class="panel panel-video">
                 <div class="panel-video-thumbnail">
                     <a href="#">
-                        <img src="HHUMediathek_Startseite-Dateien/thumb_005_002.jpg" class="video-thumbnail">
+                        <div class="video-thumbnail2" data-thumbnail="4" data-img="/assets/thumbnails2.jpg"></div>
                         <span class="label label-default video-time">01:25:49</span>
                     </a>
                 </div>
