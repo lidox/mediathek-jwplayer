@@ -33,7 +33,7 @@
 
     <script src="HHUMediathek_Startseite-Dateien/bootstrap.js"></script>
 <script src="HHUMediathek_Startseite-Dateien/respond.js"></script>
-<script src="/js/video-thumbnails.js"></script>
+<script src="/js/video-thumbnails.js"/>
 
     <script type="text/javascript">
     $(function () {
@@ -65,12 +65,19 @@
     });
     </script>
 	
+	<script>
+		document.addEventListener("DOMContentLoaded", function(e){
+		var videoThumb = new VideoThumbnail('video-thumbnail2', 4);
+			console.log(videoThumb);
+		});
+	</script>
+	
 	<style>
 		.video-thumbnail2 {
-				width: 200%;
-				height: 0;
-				padding-bottom: 44%;
-			    background-size: 200%;
+			width: 200%;
+			height: 0;
+			padding-bottom: 44%;
+			background-size: 200%;
 			display:block;
 		}
 	</style>
@@ -529,4 +536,5 @@
                 </button>
             </div>
         </div>
-    </div></div></body></html>
+    </div></div>
+	</body></html>

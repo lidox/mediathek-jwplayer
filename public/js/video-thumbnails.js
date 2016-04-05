@@ -1,8 +1,9 @@
-
-window.onload = function () {
+var VideoThumbnail = function (thumbnailClassName, maxThumbnailCount) {
 	
-	var thumbnailDivList = document.getElementsByClassName('video-thumbnail2');
-	var maxThumbnailNr = 4;
+	console.log('instance created');
+
+	var thumbnailDivList = document.getElementsByClassName(thumbnailClassName);
+	var maxThumbnailNr = maxThumbnailCount;
 	
 	for (var i = 0; i < thumbnailDivList.length; ++i) {		
 		var defaultThumbnailNr = thumbnailDivList[i].dataset.hasOwnProperty('thumbnail') ? thumbnailDivList[i].dataset.thumbnail : 1;
@@ -86,8 +87,9 @@ window.onload = function () {
 	function setDivBackgroundImage(divElem) {
 		var defaultThumbnailNr = divElem.dataset.hasOwnProperty('thumbnail') ? divElem.dataset.thumbnail : 1;
 		var defaultBackgroundImg = divElem.dataset.hasOwnProperty('img') ? divElem.dataset.img : 1;
-		divElem.style.backgroundImage = 'url(' + defaultBackgroundImg + ')';	
+		divElem.style.backgroundImage = 'url(' + defaultBackgroundImg + ')';
 		var thumbnailMapWidth = getThumbnailMapWidthByDivElement(divElem);			
 		setDivBackgroundByPosX(divElem, (thumbnailMapWidth - (defaultThumbnailNr * divElem.offsetWidth)));	
     } 
-}
+
+};
