@@ -133,6 +133,36 @@
 				document.getElementById('status').innerHTML = 'PLAY clicked';
 			});
 			
+			playerInstance.onReady(function(){
+				var myLogo = document.createElement("div");
+				myLogo.id = "myTestLogo";
+				myLogo.setAttribute('style',"color: red; padding-left: 5px; margin-right: 5px; margin-top: 10px; background-image: url('/icon_dir.png');background-repeat: no-repeat;");
+				myLogo.setAttribute('class','jw-icon jw-icon-inline jw-button-color jw-reset jw-icon-logo');
+				myLogo.setAttribute('onclick','window.location="http://jwplayer.com"');
+				document.getElementsByClassName('jw-controlbar-right-group')[0].appendChild(myLogo);
+				
+			    if (jwplayer().getRenderingMode() == "flash") {
+        			return;
+      			}
+
+				tag = document.querySelector('video');
+				tag.defaultPlaybackRate = 1.0;
+				tag.playbackRate = 1.0;
+
+			playerInstance.addButton(
+                "/icons/icon_dir.png",
+                "slow motion", 
+                function() {
+					playerInstance.seek(playerInstance.getPosition());
+        			tag.playbackRate = 0.3;
+                },
+                "slow"
+             ); 
+				
+
+
+			});
+			
 		    // 10 sek button
 			if (jwplayer().getRenderingMode() == "html5"){
             	
@@ -181,7 +211,6 @@
                 alert("your browser doesn't support HTML5，cant't change speed.");
               }
              console.log("state is :"+playerInstance.getState());
-                
 		</script>
 			</video>				
         
