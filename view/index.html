@@ -122,6 +122,17 @@
         </script>
 		
 		<script type="text/javascript">
+            function changePlaybackRate() {
+                if(tag.playbackRate != 2.0){
+                    tag.playbackRate += 0.5;
+                }
+                else{
+                    tag.playbackRate = 0.5;
+                }
+                playerInstance.seek(playerInstance.getPosition());
+            }
+            
+            
 			document.getElementById("status").style.color = "red";
 			playerInstance.onPause(function(){
 				console.log('PAUSE');
@@ -135,11 +146,11 @@
 			
 			playerInstance.onReady(function(){
 				var myLogo = document.createElement("div");
-				myLogo.id = "myTestLogo";
-				myLogo.setAttribute('style',"color: red; padding-left: 5px; margin-right: 5px; margin-top: 10px; background-image: url('/icon_dir.png');background-repeat: no-repeat;");
-				myLogo.setAttribute('class','jw-icon jw-icon-inline jw-button-color jw-reset jw-icon-logo');
-				myLogo.setAttribute('onclick','window.location="http://jwplayer.com"');
-				document.getElementsByClassName('jw-controlbar-right-group')[0].appendChild(myLogo);
+				myLogo.id = "changeSpeed";
+				myLogo.setAttribute('style',"padding-left: 5px; margin-right: 5px; margin-top: 3px;");
+				myLogo.setAttribute('class','jw-icon jw-icon-inline jw-button-color jw-reset jw-icon-logo jw-icon-next');
+				myLogo.setAttribute('onclick','changePlaybackRate()');
+				document.getElementsByClassName('jw-controlbar-left-group')[0].appendChild(myLogo);
 				
 			    if (jwplayer().getRenderingMode() == "flash") {
         			return;
