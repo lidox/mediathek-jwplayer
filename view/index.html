@@ -166,13 +166,15 @@
                 // add play back button 
 				var playBack = document.createElement("div");
 				playBack.id = "play10sekback";
-				playBack.setAttribute('style',"background-image: url('/icon_dir.png');background-repeat: no-repeat; position: relative; top: 50%; display: table; height: 3.5em; width: 3.5em; margin: -1.75em auto 0; cursor: pointer;");
+				playBack.setAttribute('style',"background-image: url('/icons/Clock-Back-icon.png');background-repeat: no-repeat; position: relative; top: 50%; display: table; height: 3.5em; width: 3.5em; margin: -1.75em auto 0; cursor: pointer;");
 				playBack.setAttribute('class','jw-icon jw-button-color jw-reset');
 				playBack.setAttribute('onclick','changePlaybackRate()');
 				
                 var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];
-                middleBar.appendChild(playBack);
+                //middleBar.appendChild(playBack);
                 middleBar.setAttribute('style',"background-color:rgba(0, 0, 0, 0.0); border: 0px; display: flex;");
+                var playButton = middleBar.childNodes[1];
+                middleBar.replaceChild(playButton, playBack);
                 
 			});
 			
