@@ -122,11 +122,12 @@
         </script>
 		
 		<script type="text/javascript">
-            function changePlaybackRate() {
-                tag = document.querySelector('video');
-				tag.defaultPlaybackRate = 1.0;
-				tag.playbackRate = 1.0;
-                
+            var tag = document.querySelector('video');
+			tag.defaultPlaybackRate = 1.0;
+			tag.playbackRate = 1.0;
+			
+			function changePlaybackRate() { 
+				var tag = document.querySelector('video');
                 if(tag.playbackRate != 2.0){
                     tag.playbackRate += 0.5;
                 }
@@ -136,14 +137,29 @@
                 playerInstance.seek(playerInstance.getPosition());
             }
             
-            
+            function playTenSecsBack() {
+				var time = playerInstance.getPosition() - 10;
+				if(time < 0) { 
+					time = 0; 
+				}
+				playerInstance.seek(time);
+            }
+			
+			function jumpBySeconds(seksToJump) {
+				var time = playerInstance.getPosition() + seksToJump;
+				if(time < 0) { 
+					time = 0; 
+				}
+				playerInstance.seek(time);
+            }
+			
 			document.getElementById("status").style.color = "red";
 			playerInstance.onPause(function(){
 				console.log('PAUSE');
 				document.getElementById('status').innerHTML = 'PAUSE clicked';
                 
                 var testIt = document.getElementsByClassName('jw-display-icon-container jw-background-color jw-reset')[0];
-                testIt.setAttribute('style',"position: relative; top: 50%; display: table; height: 3.5em; width: 3.5em; margin: -1.75em auto 0; cursor: pointer; background-color:rgba(0, 0, 0, 0.0); border: 0px; display: flex; ");
+                testIt.setAttribute('style',"position: relative; top: 50%; display: table; height: 3.5em; width: 3.5em; margin: -2.5em auto 0; cursor: pointer; background-color:rgba(0, 0, 0, 0.0); border: 0px; display: flex; width: 10.5em; margin: -1.0em auto 0;");
 			});
 			
 			playerInstance.onPlay(function(){
@@ -163,21 +179,36 @@
 				myLogo.setAttribute('onclick','changePlaybackRate()');
 				document.getElementsByClassName('jw-controlbar-left-group')[0].appendChild(myLogo);
                 
-                // add play back button 
+                // add play 5 sek back button 
 				var playBack = document.createElement("div");
 				playBack.id = "play10sekback";
-				playBack.setAttribute('style',"background-image: url('/icons/Clock-Back-icon.png');background-repeat: no-repeat; position: relative; top: 50%; display: table; height: 3.5em; width: 3.5em; margin: -1.75em auto 0; cursor: pointer;");
+				playBack.setAttribute('style',"background-image: url('/icons/Clock-Back-icon.png');background-repeat: no-repeat; position: relative; top: 50%; width: 100%; margin: -2.5em auto 0; cursor: pointer;");
 				playBack.setAttribute('class','jw-icon jw-button-color jw-reset');
-				playBack.setAttribute('onclick','changePlaybackRate()');
+				playBack.setAttribute('onclick','jumpBySeconds(-5)');
 				
                 var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];
-                //middleBar.appendChild(playBack);
+                middleBar.appendChild(playBack);
                 middleBar.setAttribute('style',"background-color:rgba(0, 0, 0, 0.0); border: 0px; display: flex;");
                 var playButton = middleBar.childNodes[1];
-                middleBar.replaceChild(playButton, playBack);
-                
+				middleBar.removeChild(playButton);
+				middleBar.appendChild(playButton);
+
+				// image: http://www.iconarchive.com/show/outline-icons-by-iconsmind/Clock-Back-icon.html
+                // add play 5 sek forward button 
+				var playForward = document.createElement("div");
+				playForward.id = "play10sekforward";
+				playForward.setAttribute('style',"background-image: url('/icons/Clock-Forward-icon.png');background-repeat: no-repeat; position: relative; top: 50%; width: 100%; margin: -2.5em auto 0; cursor: pointer; margin-left: 8%;");
+				playForward.setAttribute('class','jw-icon jw-button-color jw-reset');
+				playForward.setAttribute('onclick','jumpBySeconds(5)');
+                var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];
+                middleBar.appendChild(playForward);
+				
+				// set icon to center
+				middleBar.style.width = "100%";
+				middleBar.style.margin = "-1.0em auto 0";
 			});
 			
+			/*
 		    // 10 sek button
 			if (jwplayer().getRenderingMode() == "html5"){
             	
@@ -192,7 +223,12 @@
                 "10sekBackBtn",
                 "sekBackBtnClass"
                 ); 
-			    
+			 }
+             else{
+                alert("your browser doesn't support HTML5，cant't change speed.");
+              }
+             console.log("state is :"+playerInstance.getState());
+			  */  
                 //var sekBackBtn = document.getElementsByClassName('sekBackBtnClass')[0];
                 //sekBackBtn.setAttribute('style',"text-align: center");
 
@@ -209,30 +245,40 @@
 				"testButton"
                 ); 
 				*/
-             }
 			
-             else{
-                alert("your browser doesn't support HTML5，cant't change speed.");
-              }
-             console.log("state is :"+playerInstance.getState());
+			
+var playerFrame = document.getElementById("container");
+playerFrame.onmouseout = function() {
+	console.log("out");
+  if (!playerFrame.classList.contains('jw-flag-user-inactive')) {
+    playerFrame.className += ' ' + 'jw-flag-user-inactive';
+  }
+}
+playerFrame.onmouseover = function() {
+  if (playerFrame.classList.contains('jw-flag-user-inactive')) {
+    playerFrame.classList.remove('jw-flag-user-inactive');
+  }
+	console.log("in");
+}
+			
+		
 		</script>
 			</video>				
         
     </div>
     
     <h3>
-    <a href="#" onclick="playerInstance.seek(15);" class="watch-chapters-list-anchor">								             <span class="watch-chapters-chapter">									
-    <span class="watch-chapters-chapternumber">Kapitel 1:</span>		
-    <span class="watch-chapters-chaptertext">Springe auf eine bestimmte Stelle</span>
-    </span>								
-    <span class="watch-chapters-time">00:15</span>						
+    <a href="#" onclick="playerInstance.seek(15);" class="watch-chapters-list-anchor"><span class="watch-chapters-chapter">							
+    <span class="watch-chapters-chapternumber">Zitatfunktion:</span>		
+    <span class="watch-chapters-chaptertext">Springe auf die Stelle 00:15s</span>
+    </span>													
     </a>
     </h3>
     
     <h3>
-    <a href="#" onclick="playerInstance.plugins.tracky.seekToNextChapter();" class="watch-chapters-list-anchor">				<span class="watch-chapters-chapter">									
-    <span class="watch-chapters-chapternumber">Springe:</span>		
-    <span class="watch-chapters-chaptertext">zum nächsten Chapter</span>
+    <a href="#" onclick="playerInstance.plugins.tracky.seekToNextChapter();" class="watch-chapters-list-anchor"><span class="watch-chapters-chapter">									
+    <span class="watch-chapters-chapternumber">Kapitelfunktion:</span>		
+    <span class="watch-chapters-chaptertext">Springe zum nächsten Kapitel</span>
     </span>														
     </a>
     </h3>
