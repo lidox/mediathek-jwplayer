@@ -158,7 +158,7 @@
 				testIt.style.display = "table";
 				
 			    var playBackBtn = document.getElementById("play10sekback");
-				playBackBtn.style.display = "inline";
+				//playBackBtn.style.display = "inline";
             }
 			
 			function hideButtons() {
@@ -184,7 +184,10 @@
                 // add button to controlbar
 				var myLogo = document.createElement("div");
 				myLogo.id = "changeSpeed";
-				myLogo.setAttribute('style',"padding-left: 5px; margin-right: 5px; margin-top: 3px;");
+                myLogo.style.paddingLeft = "5px";
+                myLogo.style.marginRight = "5px";
+                myLogo.style.marginTop = "3px";
+				//myLogo.setAttribute('style',"padding-left: 5px; margin-right: 5px; margin-top: 3px;");
 				myLogo.setAttribute('class','jw-icon jw-icon-inline jw-button-color jw-reset jw-icon-logo jw-icon-next');
 				myLogo.setAttribute('onclick','changePlaybackRate()');
 				document.getElementsByClassName('jw-controlbar-left-group')[0].appendChild(myLogo);
@@ -192,14 +195,22 @@
                 // add play 5 sek back button 
 				var playBack = document.createElement("div");
 				playBack.id = "play10sekback";
-				playBack.setAttribute('style',"background-image: url('/icons/Clock-Back-icon.png');background-repeat: no-repeat; position: relative;");
+                playBack.setAttribute('class','jw-icon jw-icon-display jw-button-color jw-reset'); //jw-icon jw-icon-display jw-button-color jw-reset
+				playBack.setAttribute('style',"background-image: url('/icons/Clock-Back-icon.png');background-repeat: no-repeat; position: relative; background-position: initial !important; color: rgba(240, 255, 255, 0) !important;");
 				playBack.style.paddingLeft = "10%";
+                playBack.style.backgroundImage = "url('/icons/Clock-Back-icon.png')";
+                playBack.style.backgroundRepeat = "no-repeat";
 				playBack.style.paddingRight = "1%";
 				playBack.style.paddingBottom = "100%";
 				playBack.style.marginLeft = "38%";
 				playBack.style.marginRight = "-1%";
 				playBack.style.height = "100%";
-				playBack.setAttribute('class','jw-icon jw-button-color jw-reset');
+                playBack.style.backgroundPosition = "initial !important";
+                playBack.style.color = "rgba(240, 255, 255, 0) !important";
+				
+                // background-position: initial !important;
+               // color: rgba(240, 255, 255, 0) !important;
+                
 				playBack.setAttribute('onclick','jumpBySeconds(-5)');
 				
                 var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];
@@ -213,12 +224,18 @@
                 // add play 5 sek forward button 
 				var playForward = document.createElement("div");
 				playForward.id = "play10sekforward";
-				playForward.setAttribute('style',"background-image: url('/icons/Clock-Forward-icon.png');background-repeat: no-repeat; position: relative; cursor: pointer;");
+				playForward.setAttribute('style',"background-image: url('/icons/Clock-Forward-icon.png');background-repeat: no-repeat; position: relative; cursor: pointer; background-position: initial !important; color: rgba(240, 255, 255, 0) !important;");
+                playForward.setAttribute('class','jw-icon jw-button-color jw-icon-display jw-reset');
+                playForward.style.backgroundImage = "url('/icons/Clock-Forward-icon.png')";
+                playForward.style.backgroundRepeat = "no-repeat";
+                playForward.style.position = "relative";
 				playForward.style.paddingRight = "50%";
 				playForward.style.marginLeft = "3%";
 				playForward.style.marginRight = "38%";
 				playForward.style.paddingBottom = "100%";
-				playForward.setAttribute('class','jw-icon jw-button-color jw-reset');
+                playForward.style.backgroundPosition = "initial !important";
+                playForward.style.color = "rgba(240, 255, 255, 0) !important";
+				
 				playForward.setAttribute('onclick','jumpBySeconds(5)');
                 var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];
                 middleBar.appendChild(playForward);
