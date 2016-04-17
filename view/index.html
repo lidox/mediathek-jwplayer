@@ -18,6 +18,47 @@
 		 }
     </style>
     
+    <style>
+
+		.jumpForward {
+            background-image: url('/icons/Clock-Forward-icon.png') !important;
+            background-repeat: no-repeat !important;;
+            position: relative !important;;
+            cursor: pointer !important; 
+            background-position: initial !important;
+            color: rgba(240, 255, 255, 0) !important;
+            padding-right: 50% !important;
+            margin-left: 4% !important;
+            margin-right: 38% !important;
+            padding-bottom: 100% !important;
+            
+		 }
+        
+        .jumpBackward {
+            background-image: url('/icons/Clock-Back-icon.png') !important;
+            background-repeat: no-repeat !important;
+            position: relative !important;
+            background-position: initial !important;
+            color: rgba(240, 255, 255, 0) !important;
+            padding: 3% !important;
+            padding-left: 5% !important;
+            padding-right: 0% !important;
+            margin: 0% !important;
+            margin-left: 38% !important;
+            margin-right: 3% !important;
+            height: 130% !important;
+            width: 130% !important;
+            
+            
+		 }
+                
+        .jw-reset {
+            line-height: 2em !important;
+		 }
+        
+        
+    </style>
+    
     <script src="//134.99.218.18:443/jwplayer/jwplayer.js"></script>
     <script>jwplayer.key="l1I4qfPf1ZS1o4t4rTNYK+3dolhmm/M2vSC6Vg==";</script>
     
@@ -73,6 +114,7 @@
                 image: "//content.jwplatform.com/thumbs/3XnJSIm4-640.jpg",
                 width: 640,
                 height: 270,
+                volume: 2,
                 
                 // thumbnails + captions
                 tracks: [
@@ -155,18 +197,17 @@
 			
 			function displayButtons() {
 				var testIt = document.getElementsByClassName('jw-display-icon-container jw-background-color jw-reset')[0];
-				testIt.style.display = "table";
+				//testIt.style.display = "inline";
 				
-			    var playBackBtn = document.getElementById("play10sekback");
+			    //var playBackBtn = document.getElementById("play10sekback");
 				//playBackBtn.style.display = "inline";
             }
 			
 			function hideButtons() {
                 var testIt = document.getElementsByClassName('jw-display-icon-container jw-background-color jw-reset')[0];
-                testIt.style.display = "none";
+                //testIt.style.display = "none";
             }
 			
-			document.getElementById("status").style.color = "red";
 			playerInstance.onPause(function(){
 				console.log('PAUSE');
 				document.getElementById('status').innerHTML = 'PAUSE clicked';
@@ -176,7 +217,6 @@
 			playerInstance.onPlay(function(){
 				console.log('PLAY');
 				document.getElementById('status').innerHTML = 'PLAY clicked';
-                
                 hideButtons();
 			});
 			
@@ -187,7 +227,6 @@
                 myLogo.style.paddingLeft = "5px";
                 myLogo.style.marginRight = "5px";
                 myLogo.style.marginTop = "3px";
-				//myLogo.setAttribute('style',"padding-left: 5px; margin-right: 5px; margin-top: 3px;");
 				myLogo.setAttribute('class','jw-icon jw-icon-inline jw-button-color jw-reset jw-icon-logo jw-icon-next');
 				myLogo.setAttribute('onclick','changePlaybackRate()');
 				document.getElementsByClassName('jw-controlbar-left-group')[0].appendChild(myLogo);
@@ -195,53 +234,28 @@
                 // add play 5 sek back button 
 				var playBack = document.createElement("div");
 				playBack.id = "play10sekback";
-                playBack.setAttribute('class','jw-icon jw-icon-display jw-button-color jw-reset'); //jw-icon jw-icon-display jw-button-color jw-reset
-				playBack.setAttribute('style',"background-image: url('/icons/Clock-Back-icon.png');background-repeat: no-repeat; position: relative; background-position: initial !important; color: rgba(240, 255, 255, 0) !important;");
-				playBack.style.paddingLeft = "10%";
-                playBack.style.backgroundImage = "url('/icons/Clock-Back-icon.png')";
-                playBack.style.backgroundRepeat = "no-repeat";
-				playBack.style.paddingRight = "1%";
-				playBack.style.paddingBottom = "100%";
-				playBack.style.marginLeft = "38%";
-				playBack.style.marginRight = "-1%";
-				playBack.style.height = "100%";
-                playBack.style.backgroundPosition = "initial !important";
-                playBack.style.color = "rgba(240, 255, 255, 0) !important";
-				
-                // background-position: initial !important;
-               // color: rgba(240, 255, 255, 0) !important;
-                
+                playBack.setAttribute('class','jw-icon jw-icon-display jw-button-color jumpBackward jw-reset');   
 				playBack.setAttribute('onclick','jumpBySeconds(-5)');
 				
                 var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];
                 middleBar.appendChild(playBack);
                 middleBar.setAttribute('style',"background-color:rgba(0, 0, 0, 0.0); border: 0px; display: flex;");
+                /*middleBar.style.backgroundColor = "rgba(0, 0, 0, 0.0) !important";
+                middleBar.style.border = "0px";
+                middleBar.style.display = "flex !important";
+                */
                 var playButton = middleBar.childNodes[1];
 				middleBar.removeChild(playButton);
 				middleBar.appendChild(playButton);
 
-				// image: http://www.iconarchive.com/show/outline-icons-by-iconsmind/Clock-Back-icon.html
                 // add play 5 sek forward button 
 				var playForward = document.createElement("div");
 				playForward.id = "play10sekforward";
-				playForward.setAttribute('style',"background-image: url('/icons/Clock-Forward-icon.png');background-repeat: no-repeat; position: relative; cursor: pointer; background-position: initial !important; color: rgba(240, 255, 255, 0) !important;");
-                playForward.setAttribute('class','jw-icon jw-button-color jw-icon-display jw-reset');
-                playForward.style.backgroundImage = "url('/icons/Clock-Forward-icon.png')";
-                playForward.style.backgroundRepeat = "no-repeat";
-                playForward.style.position = "relative";
-				playForward.style.paddingRight = "50%";
-				playForward.style.marginLeft = "3%";
-				playForward.style.marginRight = "38%";
-				playForward.style.paddingBottom = "100%";
-                playForward.style.backgroundPosition = "initial !important";
-                playForward.style.color = "rgba(240, 255, 255, 0) !important";
-				
+                playForward.setAttribute('class','jw-icon jw-button-color jw-icon-display jw-reset jumpForward');
 				playForward.setAttribute('onclick','jumpBySeconds(5)');
-                var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];
-                middleBar.appendChild(playForward);
-				
-								   
-				
+                
+                var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];  
+                middleBar.appendChild(playForward);					   	
 				// set icon to center
 				middleBar.style.width = "100%";
 				middleBar.style.margin = "-1.0em auto 0";
