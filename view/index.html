@@ -21,40 +21,63 @@
     <style>
 
 		.jumpForward {
-            background-image: url('/icons/Clock-Forward-icon.png') !important;
+            background-image: url('/icons/play-forward-hhu.png') !important;
             background-repeat: no-repeat !important;;
             position: relative !important;;
             cursor: pointer !important; 
             background-position: initial !important;
             color: rgba(240, 255, 255, 0) !important;
-            padding-right: 50% !important;
+            padding-right: 5% !important;
+            padding: 100px !important;
             margin-left: 4% !important;
             margin-right: 38% !important;
             padding-bottom: 100% !important;
             
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            
 		 }
         
         .jumpBackward {
-            background-image: url('/icons/Clock-Back-icon.png') !important;
+            background-image: url('/icons/play-backward-hhu.png') !important;
             background-repeat: no-repeat !important;
             position: relative !important;
             background-position: initial !important;
             color: rgba(240, 255, 255, 0) !important;
-            padding: 3% !important;
+            padding: 100px !important;
             padding-left: 5% !important;
-            padding-right: 0% !important;
+            /*padding-right: 5% !important;*/
             margin: 0% !important;
             margin-left: 38% !important;
             margin-right: 3% !important;
-            height: 130% !important;
-            width: 130% !important;
+            max-width:100% !important;
+            height: auto; !important;
+            padding-bottom: 100% !important;
             
-            
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
 		 }
                 
         .jw-reset {
             line-height: 2em !important;
 		 }
+        
+        .jw-skin-seven .jw-icon-display {
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            font-size: 4em !important;
+        }
+        
+        /* Amazon
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        */
         
         
     </style>
@@ -232,7 +255,7 @@
 				document.getElementsByClassName('jw-controlbar-left-group')[0].appendChild(myLogo);
                 
                 // add play 5 sek back button 
-				var playBack = document.createElement("div");
+				var playBack = document.createElement("img");
 				playBack.id = "play10sekback";
                 playBack.setAttribute('class','jw-icon jw-icon-display jw-button-color jumpBackward jw-reset');   
 				playBack.setAttribute('onclick','jumpBySeconds(-5)');
@@ -249,7 +272,7 @@
 				middleBar.appendChild(playButton);
 
                 // add play 5 sek forward button 
-				var playForward = document.createElement("div");
+				var playForward = document.createElement("img");
 				playForward.id = "play10sekforward";
                 playForward.setAttribute('class','jw-icon jw-button-color jw-icon-display jw-reset jumpForward');
 				playForward.setAttribute('onclick','jumpBySeconds(5)');
