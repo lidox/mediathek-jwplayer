@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mediathek jwPlayer</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link href="/skins/bekle.css" rel="stylesheet" type="text/css" />
     <style>
@@ -84,22 +84,31 @@
     
     <script src="//134.99.218.18:443/jwplayer/jwplayer.js"></script>
     <script>jwplayer.key="l1I4qfPf1ZS1o4t4rTNYK+3dolhmm/M2vSC6Vg==";</script>
-    
+
+        <div class="container">
+            <div class="row">
+                <h2 class="text-center">Mediathek JW-Player Testing</h2>
+            <ul class="list-inline">
+                <li><a href="/">Video</a></li>
+                <li><a href="/thumbnail">Thumbnails</a></li>
+                <li><a href="/test">Mediathek Video</a></li>
+                <li><a href="https://github.com/lidox/mediathek-jwplayer">Github</a></li>
+            </ul>  
+            </div>
+        </div> 
 </head>
 <body>
    
+    <div class="container">
 	
     <div class="mycontainer">
-        <div class="jumbotron">
-            <h2>Mediathek JW-Player Testing</h2>
-        </div>
         
 		<h1><label id="status"></label></h1>
-        <video id="container">
+        <video id="video">
 		
         <script type="text/javascript">
 
-            var playerInstance = jwplayer('container');
+            var playerInstance = jwplayer('video');
             playerInstance.setup({
                 // hhu skin. skin css linked at the top
                 skin: {
@@ -187,6 +196,7 @@
         </script>
 		
 		<script type="text/javascript">
+            listenToControlBar();
             var tag = document.querySelector('video');
 			tag.defaultPlaybackRate = 1.0;
 			tag.playbackRate = 1.0;
@@ -230,19 +240,47 @@
                 var testIt = document.getElementsByClassName('jw-display-icon-container jw-background-color jw-reset')[0];
                 //testIt.style.display = "none";
             }
+            
+        	function listenToControlBar() {
+               var maxTime = 2000; // 2 seconds
+               var time = 0;
+
+               var interval = setInterval(function () {
+                    if($('.jw-controlbar').is(':visible')) {
+                        // visible, do something
+                        console.log('visbile');
+                        clearInterval(interval);
+                    } else {
+                        // not visible yet, do something
+                        console.log('invisbile');
+                        time += 100;
+                    }
+                }, 200);
+                
+			
+            }
+            
+
 			
 			playerInstance.onPause(function(){
 				console.log('PAUSE');
 				document.getElementById('status').innerHTML = 'PAUSE clicked';
                 displayButtons();
+                
 			});
 			
 			playerInstance.onPlay(function(){
 				console.log('PLAY');
 				document.getElementById('status').innerHTML = 'PLAY clicked';
                 hideButtons();
+                //listenToControlBar();
 			});
-			
+            
+            /*playerInstance.on('controls', functio {
+                document.getElementById('status').innerHTML = 'onControls';
+                console.log('onControls');
+            });*/
+            
 			playerInstance.onReady(function(){
                 // add button to controlbar
 				var myLogo = document.createElement("div");
@@ -287,9 +325,19 @@
 				var t = document.getElementsByClassName('jw-video jw-reset')[0];
 				t.onmousemove = function(){displayButtons();};
 			    //t.onmouseout = function(){hideButtons();};
-				t.onmouseleave = function(){hideButtons();};
-			});
-			
+				//t.onmouseleave = function(){listenToControlBar();};
+                //t.onmouseout = function(){listenToControlBar();};
+                
+                /*onmouseout
+                var controlbar = document.getElementsByClassName('jw-controlbar')[0];
+                controlbar.addEventListener('DOMAttrModified', function(e){
+                    if (e.attrName === 'style') {
+                        console.log('prevValue: ' + e.prevValue, 'newValue: ' + e.newValue);
+                    }
+                }, false);
+                */
+                
+			 });
 			/*
 		    // 10 sek button
 			if (jwplayer().getRenderingMode() == "html5"){
@@ -336,6 +384,8 @@
 		</script>
 			</video>				
         
+    </div>
+
     </div>
     
     <h3>
