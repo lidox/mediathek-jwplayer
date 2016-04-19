@@ -6,20 +6,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link href="/skins/bekle.css" rel="stylesheet" type="text/css" />
-    <style>
-        body { padding-top:50px; }
-		.testButton {
-			position: absolute;
-				top: 0;
-				left: 0;
-				width: 55%;
-				height: 55%;
-				background-color: yellow;
-		 }
-    </style>
-    
-    <style>
 
+    <style>
 		.jumpForward {
             background-image: url('/icons/play-forward-hhu.png') !important;
             background-repeat: no-repeat !important;;
@@ -65,29 +53,17 @@
 		 }
         
         .jw-skin-seven .jw-icon-display {
-            display: block !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
+            display: block !important; 
             font-size: 4em !important;
         }
-        
-        /* Amazon
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        */
-        
-        
+    
     </style>
     
     <script src="//134.99.218.18:443/jwplayer/jwplayer.js"></script>
     <script>jwplayer.key="l1I4qfPf1ZS1o4t4rTNYK+3dolhmm/M2vSC6Vg==";</script>
-
         <div class="container">
             <div class="row">
-                <h2 class="text-center">Mediathek JW-Player Testing</h2>
+            <h2 class="text-center">Mediathek JW-Player Testing</h2>
             <ul class="list-inline">
                 <li><a href="/">Video</a></li>
                 <li><a href="/thumbnail">Thumbnails</a></li>
@@ -100,37 +76,16 @@
 <body>
    
     <div class="container">
-	
-    <div class="mycontainer">
-        
-		<h1><label id="status"></label></h1>
-        <video id="video">
-		
+    	<div class="mycontainer">   
+
+		<video id="video">
         <script type="text/javascript">
 
             var playerInstance = jwplayer('video');
             playerInstance.setup({
-                // hhu skin. skin css linked at the top
                 skin: {
                     active: "#4b90c9",  
                 },
-                
-				
-				/* add next and previos chapter
-				playlist:[{
-						title: "This has Chapters",
-						image: "http://content.jwplatform.com/thumbs/q1fx20VZ-640.jpg",
-  						file: "http://content.jwplatform.com/videos/q1fx20VZ-640.mp4",
-  					tracks: [{ 
-    					file: 'http://content.jwplatform.com/tracks/XtwSLSdq.txt',
-    					kind: 'chapters'
-  					}]
-				}],
-				*/
-				
-				
-                // video quality
-                //file: "//content.jwplatform.com/videos/3XnJSIm4-640.mp4",
                 sources: [{
                    file: "//content.jwplatform.com/videos/C4lp6Dtd-1280.mp4",
                    label: "720p HD"
@@ -168,8 +123,6 @@
                     file: "/assets/captions-de.vtt", 
                     label: "Deutsch",
                     kind: "captions", 
-                    //"default": true 
-                 
                 }],
                 
                 // html5 with fallback to flash
@@ -189,14 +142,13 @@
 		              "http://dev.powered-by-haiku.co.uk/solutions/tracky/code/tracky.js":{}
 	            },
                                  
-	             width:"100%",
+	            width:"100%",
 	            "aspectratio":"16:9"
                                  
-                  });
+               });
         </script>
 		
 		<script type="text/javascript">
-            listenToControlBar();
             var tag = document.querySelector('video');
 			tag.defaultPlaybackRate = 1.0;
 			tag.playbackRate = 1.0;
@@ -210,15 +162,7 @@
                     tag.playbackRate = 0.5;
                 }
                 playerInstance.seek(playerInstance.getPosition());
-            }
-            
-            function playTenSecsBack() {
-				var time = playerInstance.getPosition() - 10;
-				if(time < 0) { 
-					time = 0; 
-				}
-				playerInstance.seek(time);
-            }
+            }        
 			
 			function jumpBySeconds(seksToJump) {
 				var time = playerInstance.getPosition() + seksToJump;
@@ -229,59 +173,32 @@
             }
 			
 			function displayButtons() {
-				var testIt = document.getElementsByClassName('jw-display-icon-container jw-background-color jw-reset')[0];
-				//testIt.style.display = "inline";
-				
-			    //var playBackBtn = document.getElementById("play10sekback");
-				//playBackBtn.style.display = "inline";
+				var playButton = document.getElementsByClassName('jw-controls jw-reset')[0];
+				playButton.style.display = "block";
             }
 			
 			function hideButtons() {
-                var testIt = document.getElementsByClassName('jw-display-icon-container jw-background-color jw-reset')[0];
-                //testIt.style.display = "none";
+				var playButton = document.getElementsByClassName('jw-controls jw-reset')[0];
+				playButton.style.display = "none";
             }
-            
-        	function listenToControlBar() {
-               var maxTime = 2000; // 2 seconds
-               var time = 0;
-
-               var interval = setInterval(function () {
-                    if($('.jw-controlbar').is(':visible')) {
-                        // visible, do something
-                        console.log('visbile');
-                        clearInterval(interval);
-                    } else {
-                        // not visible yet, do something
-                        console.log('invisbile');
-                        time += 100;
-                    }
-                }, 200);
-                
 			
-            }
-            
-
+			function addControlbarListeners(){
+				var timer;
+				var player = document.getElementsByClassName('jwplayer')[0];
+				player.onmouseover = function(){displayButtons();};	
+				player.onmouseout = function(){hideButtons();};
+				player.addEventListener("mousemove",function(){
+					displayButtons();
+					clearTimeout(timer);
+					timer=setTimeout(mouseStopped,2000);
+				});
+				
+				function mouseStopped(){                               
+    				hideButtons();
+				}
+			}
 			
-			playerInstance.onPause(function(){
-				console.log('PAUSE');
-				document.getElementById('status').innerHTML = 'PAUSE clicked';
-                displayButtons();
-                
-			});
-			
-			playerInstance.onPlay(function(){
-				console.log('PLAY');
-				document.getElementById('status').innerHTML = 'PLAY clicked';
-                hideButtons();
-                //listenToControlBar();
-			});
-            
-            /*playerInstance.on('controls', functio {
-                document.getElementById('status').innerHTML = 'onControls';
-                console.log('onControls');
-            });*/
-            
-			playerInstance.onReady(function(){
+			function addSpeedUpButton(){
                 // add button to controlbar
 				var myLogo = document.createElement("div");
 				myLogo.id = "changeSpeed";
@@ -291,20 +208,18 @@
 				myLogo.setAttribute('class','jw-icon jw-icon-inline jw-button-color jw-reset jw-icon-logo jw-icon-next');
 				myLogo.setAttribute('onclick','changePlaybackRate()');
 				document.getElementsByClassName('jw-controlbar-left-group')[0].appendChild(myLogo);
-                
-                // add play 5 sek back button 
+			}
+			
+			function addPlayForwardAndBackwardButtons(){
+				// add play 5 sek back button 
 				var playBack = document.createElement("img");
 				playBack.id = "play10sekback";
                 playBack.setAttribute('class','jw-icon jw-icon-display jw-button-color jumpBackward jw-reset');   
-				playBack.setAttribute('onclick','jumpBySeconds(-5)');
+				playBack.setAttribute('onclick','jumpBySeconds(-10)');
 				
                 var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];
                 middleBar.appendChild(playBack);
                 middleBar.setAttribute('style',"background-color:rgba(0, 0, 0, 0.0); border: 0px; display: flex;");
-                /*middleBar.style.backgroundColor = "rgba(0, 0, 0, 0.0) !important";
-                middleBar.style.border = "0px";
-                middleBar.style.display = "flex !important";
-                */
                 var playButton = middleBar.childNodes[1];
 				middleBar.removeChild(playButton);
 				middleBar.appendChild(playButton);
@@ -313,74 +228,29 @@
 				var playForward = document.createElement("img");
 				playForward.id = "play10sekforward";
                 playForward.setAttribute('class','jw-icon jw-button-color jw-icon-display jw-reset jumpForward');
-				playForward.setAttribute('onclick','jumpBySeconds(5)');
+				playForward.setAttribute('onclick','jumpBySeconds(10)');
                 
                 var middleBar = document.getElementsByClassName('jw-display-icon-container jw-reset')[0];  
                 middleBar.appendChild(playForward);					   	
 				// set icon to center
 				middleBar.style.width = "100%";
 				middleBar.style.margin = "-1.0em auto 0";
-				
-				
-				var t = document.getElementsByClassName('jw-video jw-reset')[0];
-				t.onmousemove = function(){displayButtons();};
-			    //t.onmouseout = function(){hideButtons();};
-				//t.onmouseleave = function(){listenToControlBar();};
-                //t.onmouseout = function(){listenToControlBar();};
-                
-                /*onmouseout
-                var controlbar = document.getElementsByClassName('jw-controlbar')[0];
-                controlbar.addEventListener('DOMAttrModified', function(e){
-                    if (e.attrName === 'style') {
-                        console.log('prevValue: ' + e.prevValue, 'newValue: ' + e.newValue);
-                    }
-                }, false);
-                */
-                
+			}
+			
+			playerInstance.onPause(function(){
+				console.log("video stopped");
+			});
+			
+			playerInstance.onPlay(function(){
+				console.log("video playing...");
+			});
+            
+			playerInstance.onReady(function(){
+				addSpeedUpButton();            
+				addPlayForwardAndBackwardButtons();
+				addControlbarListeners();			
 			 });
-			/*
-		    // 10 sek button
-			if (jwplayer().getRenderingMode() == "html5"){
-            	
-				playerInstance.addButton(
-                "/icons/icon_dir.png",
-                "10", 
-                function() {
-				   var time = playerInstance.getPosition() - 10;
-				   if(time < 0) { time = 0; }
-				   playerInstance.seek(time);
-                },
-                "10sekBackBtn",
-                "sekBackBtnClass"
-                ); 
-			 }
-             else{
-                alert("your browser doesn't support HTML5，cant't change speed.");
-              }
-             console.log("state is :"+playerInstance.getState());
-			  */  
-                //var sekBackBtn = document.getElementsByClassName('sekBackBtnClass')[0];
-                //sekBackBtn.setAttribute('style',"text-align: center");
-
-				// second button: img:a,tooltip:b,callback:c,id:e,btnClass:f}
-				/*playerInstance.addButton(
-                "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjgwcHgiIGhlaWdodD0iODVweCIgdmlld0JveD0iMCAwIDgwIDg1IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggMy4zICgxMTk3MCkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+MTBzIGJhY2s8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0ibmV3LWxheW91dCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc2tldGNoOnR5cGU9Ik1TUGFnZSI+CiAgICAgICAgPGcgaWQ9Ik5ldy1sYXlvdXQiIHNrZXRjaDp0eXBlPSJNU0FydGJvYXJkR3JvdXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03MTAuMDAwMDAwLCAtNDk2LjAwMDAwMCkiIGZpbGw9IiNGRkZGRkYiPgogICAgICAgICAgICA8ZyBpZD0iY2VudGVyLWNvbnRyb2xzIiBza2V0Y2g6dHlwZT0iTVNMYXllckdyb3VwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3MTAuMDAwMDAwLCA0OTYuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8ZyBpZD0iMTBzLWJhY2siPgogICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik02NC4yNCwxNC40Nzc3NDY1IEw2MC45NzEyNjc2LDE2LjIzMDk4NTkgQzY5Ljk0MjUzNTIsMjIuNzg5ODU5MiA3NS43NzQ2NDc5LDMzLjM4NzA0MjMgNzUuNzc0NjQ3OSw0NS4zNTIxMTI3IEM3NS43NzQ2NDc5LDY1LjI2NTM1MjEgNTkuNjMxNTQ5Myw4MS40MDg0NTA3IDM5LjcxODMwOTksODEuNDA4NDUwNyBDMTkuODA1MDcwNCw4MS40MDg0NTA3IDMuNjYxOTcxODMsNjUuMjY1MzUyMSAzLjY2MTk3MTgzLDQ1LjM1MjExMjcgQzMuNjYxOTcxODMsMjcuMTEyMTEyNyAxNy4yMDkwMTQxLDEyLjA0Mzk0MzcgMzQuNzg4NzMyNCw5LjYzOTQzNjYyIEwzNC43ODg3MzI0LDE0LjUwNzA0MjMgQzM0Ljc4ODczMjQsMTQuNTA3MDQyMyAzNC43ODA4NDUxLDE1LjQ3NDkyOTYgMzUuMDk0MDg0NSwxNS42MTAxNDA4IEMzNS41MTg4NzMyLDE1Ljc5MjY3NjEgMzYuMTM0MDg0NSwxNS4zODU5MTU1IDM2LjEzNDA4NDUsMTUuMzg1OTE1NSBMNDguMDA5MDE0MSw5LjA0OTAxNDA4IEM0OC4wMDkwMTQxLDkuMDQ5MDE0MDggNDguODI3MDQyMyw4LjY2MjUzNTIxIDQ4LjgyNzA0MjMsOC4zMDk4NTkxNSBDNDguODI3MDQyMyw3Ljg4NzMyMzk0IDQ4LjAxMDE0MDgsNy41MTIxMTI2OCA0OC4wMTAxNDA4LDcuNTEyMTEyNjggTDM1LjgzNjYxOTcsMC44OTgwMjgxNjkgQzM1LjgzNjYxOTcsMC44OTgwMjgxNjkgMzUuNDY4MTY5LDAuNjM0MzY2MTk3IDM1LjA2NDc4ODcsMC44NDk1Nzc0NjUgQzM0Ljc3NTIxMTMsMS4wMDM5NDM2NiAzNC43ODg3MzI0LDEuNjczMjM5NDQgMzQuNzg4NzMyNCwxLjY3MzIzOTQ0IEwzNC43ODg3MzI0LDYuMjM4ODczMjQgQzE1LjMzNzQ2NDgsOC42NjU5MTU0OSAwLjI4MTY5MDE0MSwyNS4yNDI4MTY5IDAuMjgxNjkwMTQxLDQ1LjM1MjExMjcgQzAuMjgxNjkwMTQxLDY3LjEzMjM5NDQgMTcuOTM4MDI4Miw4NC43ODg3MzI0IDM5LjcxODMwOTksODQuNzg4NzMyNCBDNjEuNDk4NTkxNSw4NC43ODg3MzI0IDc5LjE1NDkyOTYsNjcuMTMyMzk0NCA3OS4xNTQ5Mjk2LDQ1LjM1MjExMjcgQzc5LjE1NDkyOTYsMzIuODQyODE2OSA3My4zMjM5NDM3LDIxLjcwMjUzNTIgNjQuMjQsMTQuNDc3NzQ2NSIgaWQ9IkZpbGwtMSIgc2tldGNoOnR5cGU9Ik1TU2hhcGVHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzkuNzE4MzEwLCA0Mi43NzY4OTMpIHNjYWxlKC0xLCAxKSB0cmFuc2xhdGUoLTM5LjcxODMxMCwgLTQyLjc3Njg5MykgIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==",
-                "7", 
-                function() {
-				   var time = playerInstance.getPosition() - 10;
-				   if(time < 0) { time = 0; }
-				   playerInstance.seek(time);
-                },
-                "testButton",
-				"testButton"
-                ); 
-				*/
-			
-				
-
-
-			
-		
+	
 		</script>
 			</video>				
         

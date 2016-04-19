@@ -4771,7 +4771,7 @@
                     }
 
                     function _() {
-                        Ha = !1, clearTimeout(Da), pa.hideComponents(), a.addClass(ja, "jw-flag-user-inactive")
+                        Ha = !1, clearTimeout(Da), pa.hideComponents(), a.addClass(ja, "jw-flag-user-inactive");console.log('status changed');
                     }
 
                     function aa() {
