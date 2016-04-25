@@ -6,59 +6,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link href="/skins/bekle.css" rel="stylesheet" type="text/css" />
-
-    <style>
-		.jumpForward {
-			background-image: url('/icons/play-forward-hhu.png') !important;
-    		background-repeat: no-repeat !important;
-			background-size: contain !important;
-    		background-position: initial !important;
-   
-    		display: table-cell !important;
-    		padding-bottom: 100% !important;
-    		padding-right: 16% !important;
-    		margin-left: auto !important;
-			margin-right: auto !important;
-			margin: 0 auto !important;       
-		 }
-        
-        .jumpBackward {
-    		background-image: url('/icons/play-backward-hhu.png') !important;
-			background-repeat: no-repeat !important;
-    		background-size: contain !important;
-			background-position: initial !important;
-			color: rgba(240, 255, 255, 0) !important;
-   			padding-left: 16% !important;
-			padding-bottom: 100% !important;
-			margin-left: auto !important;
-			margin-right: auto !important;
-			margin: 0 auto !important;
-		 }
-                
-        .jw-reset {
-            line-height: 2em !important;
-		 }
-        
-        .jw-skin-seven .jw-icon-display {
-            display: table-cell !important; 
-            font-size: 4em !important;	
-        }
-		
-		.jw-display-icon-container {
-			margin: -3.75em auto 0 !important;
-			top: 50% !important;
-    		cursor: pointer !important;
-		}
-		
-		.jw-display-icon-container img{
-			width: auto  !important; 
-			height: auto !important;
-			max-width: 120px !important;
-			max-height: 100px !important;
-		}
-		
-    
-    </style>
     
     <script src="//134.99.218.18:443/jwplayer/jwplayer.js"></script>
     <script>jwplayer.key="l1I4qfPf1ZS1o4t4rTNYK+3dolhmm/M2vSC6Vg==";</script>
@@ -180,7 +127,7 @@
 			
 			function hideButtons() {
 				var playButton = document.getElementsByClassName('jw-controls jw-reset')[0];
-				//playButton.style.display = "none";
+				playButton.style.display = "none";
             }
 			
 			function addControlbarListeners(){
