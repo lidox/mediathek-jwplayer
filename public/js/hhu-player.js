@@ -1,10 +1,13 @@
 
-            var tag = document.querySelector('video');
-			tag.defaultPlaybackRate = 1.0;
-			tag.playbackRate = 1.0;
+            var tag = document.querySelector('player');
+			if (tag != null) {
+				tag.defaultPlaybackRate = 1.0;
+				tag.playbackRate = 1.0;
+			}
+
 			
 			function changePlaybackRate() { 
-				var tag = document.querySelector('video');
+				var tag = document.querySelector('player');
                 if(tag.playbackRate != 2.0){
                     tag.playbackRate += 0.5;
                 }

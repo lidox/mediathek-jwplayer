@@ -1,5 +1,5 @@
 		.jumpForward {
-			background-image: url('/icons/play-forward-hhu.png') !important;
+			background-image: url('/images/play-forward-hhu.png') !important;
     		background-repeat: no-repeat !important;
 			background-size: contain !important;
     		background-position: initial !important;
@@ -13,7 +13,7 @@
 		 }
         
         .jumpBackward {
-    		background-image: url('/icons/play-backward-hhu.png') !important;
+    		background-image: url('/images/play-backward-hhu.png') !important;
 			background-repeat: no-repeat !important;
     		background-size: contain !important;
 			background-position: initial !important;
