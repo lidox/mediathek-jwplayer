@@ -1,24 +1,25 @@
 function VTTCreator() {
+
 }
 
 VTTCreator.prototype.getTextOfVTT = function(spriteFile, singleImageWidth, singleImageHeight, videoLenghtInSeconds, imageRepetitionInPercent) {
-  		console.log('WEBVTT');
-		console.log('');
+  		var textToReturn = '';
+		textToReturn = ('WEBVTT' + '\n');
+		textToReturn += ('' + '\n');
 		
-		var onePercentInSeconds = videoLenghtInSeconds / 100;
-		var secondsPerImage = onePercentInSeconds * imageRepetitionInPercent;
+		var secondsPerImage = this.getSecondsPerImage(videoLenghtInSeconds, imageRepetitionInPercent);
 		var xPosition = 0;
 		
-		var creator = new VTTCreator();
 		for (i = 0; i < (videoLenghtInSeconds) ;) { 
 			
-			console.log(creator.secondsTohhmmss(i) + ' --> ' + creator.secondsTohhmmss( (i + secondsPerImage) ) );
-			console.log(spriteFile + '#xywh=' + xPosition + ',0,' + singleImageWidth + ',' + singleImageHeight);
-			console.log('');
+			textToReturn += (this.secondsTohhmmss(i) + ' --> ' + this.secondsTohhmmss( (i + secondsPerImage) ) + '\n');
+			textToReturn += (spriteFile + '#xywh=' + xPosition + ',0,' + singleImageWidth + ',' + singleImageHeight + '\n');
+			textToReturn += ('' + '\n');
 			
 			xPosition += singleImageWidth;
 			i += secondsPerImage;
 		}
+	return textToReturn;
 };
 
 VTTCreator.prototype.secondsTohhmmss = function(totalSeconds) {
@@ -32,6 +33,16 @@ VTTCreator.prototype.secondsTohhmmss = function(totalSeconds) {
   		var result = (hours < 10 ? "0" + hours : hours);
     	result += ":" + (minutes < 10 ? "0" + minutes : minutes);
     	result += ":" + (seconds  < 10 ? "0" + seconds : seconds);
-    	result += "." + ("000");
+		
+	    if (result.indexOf(".") == -1) {
+	    	result += "." + ("000");
+		}
+
   		return result;
+};
+
+VTTCreator.prototype.getSecondsPerImage = function(videoLenghtInSeconds, imageRepetitionInPercent) {
+		var onePercentInSeconds = videoLenghtInSeconds / 100;
+		var secondsPerImage = onePercentInSeconds * imageRepetitionInPercent;
+  		return secondsPerImage;
 };

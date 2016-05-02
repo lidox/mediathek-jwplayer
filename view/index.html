@@ -102,12 +102,11 @@
 			
 		<script src="/js/vtt-creator.js"></script>
 		<script>
-			var videoThumb = new VTTCreator();
-			videoThumb.getTextOfVTT('/images/java-fx.png', 320, 180, 7200, 2);
-			
-		
-			// getTextOfVTT(spriteFile, singleImageWidth, singleImageHeight, videoLenghtInSeconds, imageRepetitionInPercent) {
-			console.log(videoThumb);
+			var vtt = new VTTCreator();
+			var text = vtt.getTextOfVTT('java-fx.png', 320, 180, 7221, 2); // 320, 180, 7200, 2 // 120, 52, 39, 2
+			var secsPerImgae = vtt.getSecondsPerImage(7200, 2);
+			console.log(text);
+			//console.log('seconds per image: ' + secsPerImgae);
 		</script>
         
     </div>
