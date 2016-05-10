@@ -1,6 +1,4 @@
-function VTTCreator() {
-
-}
+function VTTCreator() {}
 
 VTTCreator.prototype.getTextOfVTT = function(spriteFile, singleImageWidth, singleImageHeight, videoLenghtInSeconds, imageRepetitionInPercent) {
   		var textToReturn = '';
