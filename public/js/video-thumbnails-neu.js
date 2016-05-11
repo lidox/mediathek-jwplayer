@@ -1,20 +1,20 @@
 function VideoThumbnail(thumbnailClassName, maxThumbnailCount) {
 	
 	console.log('instance created');
-	var thumbnailDivList = document.getElementsByClassName(thumbnailClassName);
-	var maxThumbnailNr = maxThumbnailCount;
+	this.thumbnailDivList = document.getElementsByClassName(thumbnailClassName);
+	this.maxThumbnailNr = maxThumbnailCount;
 	
-	for (var i = 0; i < thumbnailDivList.length; ++i) {		
-		var defaultThumbnailNr = thumbnailDivList[i].dataset.hasOwnProperty('thumbnail') ? thumbnailDivList[i].dataset.thumbnail : 1;
-		var defaultBackgroundImg = thumbnailDivList[i].dataset.hasOwnProperty('img') ? thumbnailDivList[i].dataset.img : 1;
-		thumbnailDivList[i].style.backgroundImage = 'url(' + defaultBackgroundImg + ')';	
-		var thumbnailMapWidth = this.getThumbnailMapWidthByDivElement(thumbnailDivList[i]);
+	for (var i = 0; i < this.thumbnailDivList.length; ++i) {		
+		var defaultThumbnailNr = this.thumbnailDivList[i].dataset.hasOwnProperty('thumbnail') ? this.thumbnailDivList[i].dataset.thumbnail : 1;
+		var defaultBackgroundImg = this.thumbnailDivList[i].dataset.hasOwnProperty('img') ? this.thumbnailDivList[i].dataset.img : 1;
+		this.thumbnailDivList[i].style.backgroundImage = 'url(' + defaultBackgroundImg + ')';	
+		var thumbnailMapWidth = this.getThumbnailMapWidthByDivElement(this.thumbnailDivList[i]);
 		
 		var xPosition = this.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
-		this.setDivBackgroundByPosX(thumbnailDivList[i], xPosition);
+		this.setDivBackgroundByPosX(this.thumbnailDivList[i], xPosition);
 		
-		this.setOnMouseMoveListenerByDivElement(thumbnailDivList[i], thumbnailMapWidth);
-		this.setOnMouseOutListenerByDivElement(thumbnailDivList[i], thumbnailMapWidth);
+		this.setOnMouseMoveListenerByDivElement(this.thumbnailDivList[i], thumbnailMapWidth);
+		this.setOnMouseOutListenerByDivElement(this.thumbnailDivList[i], thumbnailMapWidth);
   	}
 }
 
