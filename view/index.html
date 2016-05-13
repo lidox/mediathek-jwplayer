@@ -51,7 +51,10 @@
                 width: 640,
                 height: 270,
                 volume: 2,
-                
+                "controlbar":"bottom",
+				
+				
+				
                 // thumbnails + captions
                 tracks: [
                 {
@@ -105,7 +108,7 @@
 			var vtt = new VTTCreator();
 			var text = vtt.getTextOfVTT('sprite.png', 320, 133, 38, 2); // 320, 180, 7200, 2 // 120, 52, 39, 2
 			var secsPerImgae = vtt.getSecondsPerImage(38, 2);
-			console.log(text);
+			//console.log(text);
 			//console.log('seconds per image: ' + secsPerImgae);
 		</script>
         

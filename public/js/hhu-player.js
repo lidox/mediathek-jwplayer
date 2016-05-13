@@ -99,7 +99,13 @@
 			});
             
 			playerInstance.onReady(function(){
-				addSpeedUpButton();            
-				addPlayForwardAndBackwardButtons();
-				addControlbarListeners();			
+				//addSpeedUpButton();            
+				//addPlayForwardAndBackwardButtons();
+				//addControlbarListeners();	
+				displayControlBar();
 			 });
+
+			function displayControlBar() {
+				var controlBar = document.getElementsByClassName('jw-controlbar jw-background-color jw-reset')[0];
+				controlBar.style.display = "block";
+			}
