@@ -16,7 +16,6 @@ VideoThumbnail.prototype.setThumbnailCountOfSprite = function (thumbnailCountOfS
 };
 
 VideoThumbnail.prototype.setImageHeightInPercentage = function (imgHeightInPercentage) {
-	//var imgHeightInPercentage = 42;
 	var css = document.createElement("style");
 	css.type = "text/css";
 	var cssRules = '.'+ this.thumbnailClassName +' { width: 200%; height: 0; padding-bottom: ' + imgHeightInPercentage + '%; background-size: 200%; display:block;'
@@ -25,7 +24,7 @@ VideoThumbnail.prototype.setImageHeightInPercentage = function (imgHeightInPerce
 };
 
 VideoThumbnail.prototype.displayThumbs = function () {
-	for (var i = 0; i < this.thumbnailDivList.length; ++i) {
+	for (var i = 0; i < this.thumbnailDivList.length; ++i) {					//default-thumb-nr
 		var defaultThumbnailNr = this.thumbnailDivList[i].dataset.hasOwnProperty('thumbnail') ? this.thumbnailDivList[i].dataset.thumbnail : 1;
 		var defaultBackgroundImg = this.thumbnailDivList[i].dataset.hasOwnProperty('img') ? this.thumbnailDivList[i].dataset.img : 1;
 		this.thumbnailDivList[i].style.backgroundImage = 'url(' + defaultBackgroundImg + ')';
