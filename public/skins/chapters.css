@@ -1,0 +1,47 @@
+.vid {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.vid iframe,
+.vid object,
+.vid embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#draggablePanelList .panel-heading {
+	cursor: move;
+}
+
+#draggablePanelList {
+	margin-top: 30px;
+}
+
+.chapters-time {
+    color: #666;
+    font-size: 11px;
+    line-height: 18px;
+    width: 60px;
+    float: right;
+    overflow: hidden;
+    padding: 6px 15px 6px 10px;
+    text-align: right;
+}
+
+.btn-glyphicon {
+    padding:8px;
+    background:#ffffff;
+    margin-right:4px;
+}
+.icon-btn {
+    padding: 1px 15px 3px 2px;
+    border-radius:50px;
+	margin-top: 10px;
+}

@@ -12,6 +12,11 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/view/index.html'));
 });
 
+// chapters.html
+app.get('/chapters', function(req, res) {
+    res.sendFile(path.join(__dirname + '/view/chapters.html'));
+});
+
 // test.html
 app.get('/test', function(req, res) {
     res.sendFile(path.join(__dirname + '/view/test.html'));

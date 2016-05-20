@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Mediathek Chapters</title>
+
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/skins/chapters.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	    <script src="HHUMediathek_Startseite-Dateien/jquery-ui-1.js"></script>
+	<script src="//134.99.218.18:443/jwplayer/jwplayer.js"></script>
+	<script>
+		jwplayer.key = "l1I4qfPf1ZS1o4t4rTNYK+3dolhmm/M2vSC6Vg==";
+	</script>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<h3>Mediathek Chapter Testing</h3>
+			<p>
+				<strong><mark>Wahnsinn!</mark>Geht ne schwangere Frau in die Bäckerei und sagt: "Ich krieg ein Brot"
+Darauf der Bäcker: "Sachen gibt's, die gibt's net!</strong>
+			</p>
+			<hr>
+		</div>
+		<!--.row -->
+	</div>
+	<!--./container -->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="vid" id="container">
+					<script src="js/chapter-main.js"></script>
+				</div>
+				<!--./vid -->
+				<a class="btn icon-btn btn-success" href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Setze Kapitel</a>
+			</div>
+			<!--.col -->
+
+		</div>
+		<!--./row -->
+
+	</div>
+	<!--./container -->
+	
+		<script>
+		jQuery(function ($) {
+			var panelList = $('#draggablePanelList');
+
+			panelList.sortable({
+				// Only make the .panel-heading child elements support dragging.
+				// Omit this to make then entire <li>...</li> draggable.
+				handle: '.panel-heading'
+				, update: function () {
+					$('.panel', panelList).each(function (index, elem) {
+						var $listItem = $(elem)
+							, newIndex = $listItem.index();
+
+						// Persist the new indices.
+					});
+				}
+			});
+		});
+	</script>
+
+	<div class="container">
+		<ul id="draggablePanelList" class="list-unstyled">
+			<li class="panel panel-info">
+				<div class="panel-heading">Kapitel 1</div>
+				<div id="chapter1" class="panel-body">Opening Credits
+					<span class="chapters-time">0:00</span>
+				</div>
+				
+			</li>
+			<li class="panel panel-info">
+				<div class="panel-heading">Kapitel 2</div>
+				<div id="chapter2" class="panel-body" >A dangerous request
+					<span class="chapters-time">0:12</span>
+				</div>
+			</li>
+			<li class="panel panel-info">
+				<div class="panel-heading">Kapitel 3</div>
+				<div id="chapter3" class="panel-body">The Attack
+					<span class="chapters-time">0:20</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</body>
+
+</html>
