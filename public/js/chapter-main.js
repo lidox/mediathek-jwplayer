@@ -83,6 +83,7 @@ $( document ).ready(function() {
   	editTextById('chapter1');
 	editTextById('chapter2');
 	editTextById('chapter3');
+	makePanelsDraggable();
 });
 
 function editTextById(textId) {
@@ -106,4 +107,67 @@ function editTextById(textId) {
 		//alert('Make an AJAX call and pass this parameter >> name=' + name);
 		$('#'+textId).text(name);
 	});	
+}
+
+function makePanelsDraggable(){
+	jQuery(function ($) {
+	var panelList = $('#draggablePanelList');
+
+	panelList.sortable({
+			// Only make the .panel-heading child elements support dragging.
+			// Omit this to make then entire <li>...</li> draggable.
+			handle: '.panel-heading'
+			, update: function () {
+				$('.panel', panelList).each(function (index, elem) {
+					var $listItem = $(elem)
+						, newIndex = $listItem.index();
+
+					// Persist the new indices.
+				});
+			}
+		});
+	});
+}
+
+function addChapter(seconds){
+	addListItem(seconds);
+	addCueToPlayer(seconds);
+}
+
+function addListItem(seconds) {
+	//list-unstyled ui-sortable
+    var chapter = document.createElement("li");
+	chapter.setAttribute('class','panel panel-info');
+	
+	var title = document.createElement("div");
+	title.setAttribute('class','panel-heading ui-sortable-handle');
+	title.innerHTML = "Kapitel X"
+	// set title default text
+	title.setAttribute('onclick','playerInstance.seek('+ seconds +');');
+	
+	chapter.appendChild(title);
+	
+	var panel = document.createElement("div");
+    var d = new Date();
+	var panelId =  "chapter" + d.getTime();
+	panel.id = panelId;
+	panel.setAttribute('class','panel-body');
+	panel.innerHTML = "panel"
+	var span = document.createElement("span");
+	span.setAttribute('class','chapters-time');
+	span.innerHTML = seconds;
+	panel.appendChild(span);
+	editTextById(panelId);
+	chapter.appendChild(panel);
+	document.getElementsByClassName('list-unstyled ui-sortable')[0].appendChild(chapter);
+}
+
+function addCueToPlayer(seconds) {
+	var cue = document.createElement("div");
+	cue.setAttribute('class','jw-cue jw-reset');
+	var videoLength = playerInstance.getDuration();
+	var percentage =  (100 / videoLength ) * seconds;
+	cue.setAttribute('style','left: '+ percentage +'%;');
+	document.getElementsByClassName('jw-slider-container jw-reset')[0].appendChild(cue);
+	//jw-slider-container jw-reset
 }
