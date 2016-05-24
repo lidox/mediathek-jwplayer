@@ -4,6 +4,7 @@ function VideoThumbnail() {
 	this.thumbnailDivList = document.getElementsByClassName(this.thumbnailClassName);
 	this.maxThumbnailNr = 0;
 	this.isMouseMoveActive = false;
+	this.defaultThumbNrName = 'default-thumb-nr';
 }
 
 VideoThumbnail.prototype.setThumbnailClassName = function (thumbnailClassName) {
@@ -15,7 +16,7 @@ VideoThumbnail.prototype.setThumbnailCountOfSprite = function (thumbnailCountOfS
 	this.maxThumbnailNr = thumbnailCountOfSprite;
 };
 
-VideoThumbnail.prototype.setImageHeightInPercentage = function (imgHeightInPercentage) {
+VideoThumbnail.prototype.setImagePaddingBottomInPercentage = function (imgHeightInPercentage) {
 	var css = document.createElement("style");
 	css.type = "text/css";
 	var cssRules = '.'+ this.thumbnailClassName +' { width: 200%; height: 0; padding-bottom: ' + imgHeightInPercentage + '%; background-size: 200%; display:block;'
@@ -25,7 +26,7 @@ VideoThumbnail.prototype.setImageHeightInPercentage = function (imgHeightInPerce
 
 VideoThumbnail.prototype.displayThumbs = function () {
 	for (var i = 0; i < this.thumbnailDivList.length; ++i) {					//default-thumb-nr
-		var defaultThumbnailNr = this.thumbnailDivList[i].dataset.hasOwnProperty('thumbnail') ? this.thumbnailDivList[i].dataset.thumbnail : 1;
+		var defaultThumbnailNr = this.thumbnailDivList[i].dataset.hasOwnProperty(this.defaultThumbNrName) ? this.thumbnailDivList[i].dataset.thumbnail : 1;
 		var defaultBackgroundImg = this.thumbnailDivList[i].dataset.hasOwnProperty('img') ? this.thumbnailDivList[i].dataset.img : 1;
 		this.thumbnailDivList[i].style.backgroundImage = 'url(' + defaultBackgroundImg + ')';
 		var thumbnailMapWidth = this.getThumbnailMapWidthByDivElement(this.thumbnailDivList[i]);
@@ -54,6 +55,20 @@ VideoThumbnail.prototype.getXPositionByDefaultThumbnailNr = function (defaultThu
 		xPosition = 100 + (100 / this.maxThumbnailNr * 2);
 	} else {
 		xPosition = (100 / (this.maxThumbnailNr - defaultThumbnailNr));
+	}
+
+	return xPosition;
+};
+
+VideoThumbnail.prototype.getXPositionByDefaultThumbnailNr2 = function (defaultThumbnailNr) {
+	var xPosition = 0;
+
+	if (defaultThumbnailNr == 1) {
+		xPosition = 0;
+	} else if (defaultThumbnailNr == this.maxThumbnailNr) {
+		xPosition = 100 + (100 / this.maxThumbnailNr * 2);
+	} else {
+		xPosition = (100 / (defaultThumbnailNr - 1));
 	}
 
 	return xPosition;
@@ -98,7 +113,7 @@ VideoThumbnail.prototype.setOnMouseMoveListenerByDivElement = function (divElem,
 	divElem.onmousemove = function (event) {
 		var percentagePos = 2 * (event.offsetX / this.offsetWidth);
 		var curPx = self.getImageNrByMousePosition(thumbnailMapWidth, thumbnailMapWidth / self.maxThumbnailNr, percentagePos);
-		var xPosition = self.getXPositionByDefaultThumbnailNr(curPx);
+		var xPosition = self.getXPositionByDefaultThumbnailNr2(curPx);
 		self.setDivBackgroundByPosX(this, xPosition);
 	};
 };
@@ -106,14 +121,14 @@ VideoThumbnail.prototype.setOnMouseMoveListenerByDivElement = function (divElem,
 VideoThumbnail.prototype.setOnMouseOutListenerByDivElement = function (divElem, thumbnailMapWidth) {
 	var self = this;
 	divElem.onmouseout = function (event) {
-		var defaultThumbnailNr = this.dataset.hasOwnProperty('thumbnail') ? this.dataset.thumbnail : 0;
+		var defaultThumbnailNr = this.dataset.hasOwnProperty(self.defaultThumbNrName) ? this.dataset.thumbnail : 0;
 		var xPosition = self.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
 		self.setDivBackgroundByPosX(this, xPosition);
 	};
 };
 
 VideoThumbnail.prototype.setDivBackgroundImage = function (divElem) {
-	var defaultThumbnailNr = divElem.dataset.hasOwnProperty('thumbnail') ? divElem.dataset.thumbnail : 1;
+	var defaultThumbnailNr = divElem.dataset.hasOwnProperty(self.defaultThumbNrName) ? divElem.dataset.thumbnail : 1;
 	var defaultBackgroundImg = divElem.dataset.hasOwnProperty('img') ? divElem.dataset.img : 1;
 	divElem.style.backgroundImage = 'url(' + defaultBackgroundImg + ')';
 	var thumbnailMapWidth = this.getThumbnailMapWidthByDivElement(divElem);
