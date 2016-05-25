@@ -27,6 +27,12 @@ app.get('/thumbnail', function(req, res) {
     res.sendFile(path.join(__dirname + '/view/HHUMediathek_Startseite.htm'));
 });
 
+// test.html
+app.get('/thumbnail2', function(req, res) {
+    res.sendFile(path.join(__dirname + '/view/video-list.html'));
+});
+
+
 app.listen(port, function () {
   console.log('Example app listening on port ' + port);
 });
