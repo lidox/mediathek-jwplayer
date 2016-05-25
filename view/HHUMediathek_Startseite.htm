@@ -15,19 +15,44 @@ Feel free to copy and reuse as you like
 */
 
 /*Set the max-width to the width of your individual sprites:*/
-.stretchy {display:block; float:left; position:relative; overflow:hidden; max-width:160px;}
-.stretchy .spacer {width: 100%; height: auto;}
-.stretchy .sprite {position:absolute; top:0; left:0; max-width:none; max-height:100%;}
-.stretchy .sprite.s2 {left:-100%;}
-.stretchy .sprite.s3 {left:-200%;}
-.stretchy .sprite.s4 {left:-300%;}
-.stretchy .sprite.s5 {left:-400%;}
-.stretchy .sprite.s6 {left:-500%;}
+.stretchy {display:block !important; 
+	       float:left !important;  
+	       position:relative !important;  
+	       overflow:hidden !important;  
+	       max-width:935px !important;
+}
+.stretchy .spacer {
+	width: 100% !important;
+	height: auto !important;
+}
+.stretchy .sprite {
+	position:absolute !important;
+	top:0 !important; 
+	left:0 !important;
+	max-width:187px !important;
+	max-height:100% !important;
+	    
+}
+.stretchy .sprite.s2 {left:-100% !important;}
+.stretchy .sprite.s3 {left:-200% !important;}
+.stretchy .sprite.s4 {left:-300% !important;}
+.stretchy .sprite.s5 {left:-400% !important;}
+.stretchy .sprite.s6 {left:-500% !important;}
 
-.stretchy.no-limit {max-width: none;} /*you could also set this to a pixel size, for example 320px, to limit the maximum*/
-.stretchy.no-limit .sprite {min-height: 100%;}
+.stretchy.no-limit {
+	max-width: none !important;
+} 
+.stretchy.no-limit .sprite {
+	min-height: 100% !important;
+}
     
+.box {float: left !important; 
+	clear: both !important;
+	width: 100% !important;
+	margin: 10px 0 !important;
+	background: #eee !important;}
 
+	
 /*END stretchy sprites by tobyj.net*/
 
 </style>
@@ -88,18 +113,6 @@ Feel free to copy and reuse as you like
     });
     </script>
 	
-	<style>
-		/*
-		.video-thumbnail2 {
-			width: 200%;
-			height: 0;
-			padding-bottom: 42%;
-			background-size: 200%;
-			display:block;
-		}
-		*/
-	</style>
-	
 	<script>
 		
 		$(window).load(function(){
@@ -107,8 +120,8 @@ Feel free to copy and reuse as you like
 			
 			// configuration
 			thumbs.setThumbnailClassName('video-thumbnail2');
-			thumbs.setThumbnailCountOfSprite(6);
-			thumbs.setImagePaddingBottomInPercentage(66);
+			thumbs.setThumbnailCountOfSprite(50);
+			thumbs.setImagePaddingBottomInPercentage(42, 2000);
 			thumbs.setMouseMoveActive();
 			
 			thumbs.displayThumbs();	
@@ -202,27 +215,29 @@ Feel free to copy and reuse as you like
 <div class="container-fluid container-video">
     <div class="row row-video">
         <!-- video item -->
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video">
-            <div class="panel panel-video">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 item-video ">
+            <div class="panel panel-video no-limit">
                 <div class="panel-video-thumbnail">
-                    <a class="stretchy no-limit" href="#">
-                        <img class="spacer" alt="icon" src="/assets/spacer.png">
-                        <img class="sprite s6" alt="" src="/assets/thumbnails.jpg">
-                        <span class="label label-default video-time">01:25:49</span>
-                    </a>
-                    <!--
-                    <a class="stretchy no-limit" href="#">
-                        <img src="HHUMediathek_Startseite-Dateien/thumb_000.jpg" id="sprite" class="video-thumbnail" style="background-position: 0px 0px;" data-thumbnail="3">                      <img class="spacer" alt="icon" src="/assets/spacer.png">
-                         400, 166, 39, 2); // 320, 180, 7200, 2 // 120, 52, 39, 2
-                        <img class="sprite" alt="" src="/assets/thumbnails.jpg">
-					    
-                        <span class="label label-default video-time">01:25:49</span>
-                    </a>
+
+						<div class="stretchy no-limit">
+								<img class="sprite s2" alt="" src="/assets/thumbnails.png">
+								<img class="spacer" alt="icon" src="/assets/my-spacer.jpg"> 
+
+						</div>
+
+                    <!-- http://tobyj.net/responsive-sprites/
+					<div class="stretchy no-limit">
+							<img class="sprite s2" alt="" src="/assets/thumbnails.jpg">
+							<img class="spacer" alt="icon" src="/assets/my-spacer.jpg"> 
+							<span class="label label-default video-time">01:25:49</span>
+					</div>
                 -->
                 </div>
+				<!--
                 <div class="panel-heading panel-video-title">
                     <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
                 </div>
+				-->
                 <div class="dropdown panel-video-menu">
                     <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
                         <span class="glyphicon glyphicon-option-vertical"></span>
@@ -248,7 +263,7 @@ Feel free to copy and reuse as you like
                 <div class="panel-video-thumbnail">
                     <a href="#">
                         <!--<img src="HHUMediathek_Startseite-Dateien/thumb_000_002.jpg" class="video-thumbnail">-->
-						<div class="video-thumbnail2" data-default-thumb-nr="2" data-img="/assets/thumbnails.jpg"></div>
+						<div class="video-thumbnail2" data-default-thumb-nr="2" data-img="/assets/thumbnails.png"></div>
                         <span class="label label-default video-time">77:25:49</span>
                         <span class="label label-default video-locked"><i class="glyphicon glyphicon-lock"></i></span>
                     </a>

@@ -16,10 +16,10 @@ VideoThumbnail.prototype.setThumbnailCountOfSprite = function (thumbnailCountOfS
 	this.maxThumbnailNr = thumbnailCountOfSprite;
 };
 
-VideoThumbnail.prototype.setImagePaddingBottomInPercentage = function (imgHeightInPercentage) {
+VideoThumbnail.prototype.setImagePaddingBottomInPercentage = function (imgHeightInPercentage, width) {
 	var css = document.createElement("style");
 	css.type = "text/css";
-	var cssRules = '.'+ this.thumbnailClassName +' { width: 200%; height: 0; padding-bottom: ' + imgHeightInPercentage + '%; background-size: 200%; display:block;'
+	var cssRules = '.'+ this.thumbnailClassName +' { width: '+ width +'%; height: 0; padding-bottom: ' + imgHeightInPercentage + '%; background-size: 200%; display:block;'
 	css.innerHTML = cssRules;
 	document.body.appendChild(css);
 };
