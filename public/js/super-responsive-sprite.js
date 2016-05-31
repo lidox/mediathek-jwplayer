@@ -103,7 +103,7 @@ VideoThumbnail.prototype.setOnMouseMoveListenerByDivElement = function (divElem,
 	divElem.onmousemove = function (event) {
 		var percentagePos = 2 * (event.offsetX / this.offsetWidth);
 		var curPx = self.getImageNrByMousePosition(thumbnailMapWidth, thumbnailMapWidth / self.maxThumbnailNr, percentagePos);
-		var xPosition = self.getXPositionByDefaultThumbnailNr2(curPx);
+		var xPosition = self.getXPositionByDefaultThumbnailNr(curPx);
 		self.setDivBackgroundByPosX(this, xPosition);
 	};
 };
