@@ -37,15 +37,15 @@
         });
     </script>
     <script>
-        $(window).load(function () {
+        $( document ).ready(function() {
             var thumbs = new VideoThumbnail();
 
             // configuration
             thumbs.setThumbnailClassName('this-is-spartaaa');
             thumbs.setThumbnailCountOfSprite(6);
-            thumbs.setImagePaddingBottomInPercentage(100, 600, 100);
+            // CSS: imagePaddingBottomInPercentage and imageFitSizeInPercentage
+            thumbs.setCSS(100, 600);
             thumbs.setMouseMoveActive();
-
             thumbs.displayThumbs();
         });
     </script>
@@ -185,7 +185,7 @@
                                 
                                 <!-- ..............................................................................-->
                                 
-                                <div class="this-is-spartaaa" data-defaultnr="5" data-img="/assets/super-sprite.jpg"></div>
+                                <div class="this-is-spartaaa" data-defaultimgnr="5" data-img="/assets/super-sprite.jpg"></div>
                                                
                                  <!-- ..............................................................................-->
                                 

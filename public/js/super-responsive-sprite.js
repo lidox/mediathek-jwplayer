@@ -4,7 +4,7 @@ function VideoThumbnail() {
 	this.thumbnailDivList = document.getElementsByClassName(this.thumbnailClassName);
 	this.maxThumbnailNr = 0;
 	this.isMouseMoveActive = false;
-	this.defaultThumbNrName = 'defaultnr';
+	this.defaultThumbNrName = 'defaultimgnr';
 }
 
 VideoThumbnail.prototype.setThumbnailClassName = function (thumbnailClassName) {
@@ -16,36 +16,43 @@ VideoThumbnail.prototype.setThumbnailCountOfSprite = function (thumbnailCountOfS
 	this.maxThumbnailNr = thumbnailCountOfSprite;
 };
 
-VideoThumbnail.prototype.setImagePaddingBottomInPercentage = function (imgHeightInPercentage, backgroundSize, width) {
+VideoThumbnail.prototype.setCSS = function (imagePaddingBottomInPercentage, imageFitSizeInPercentage) {
 	var css = document.createElement("style");
 	css.type = "text/css";
-	var cssRules = '.'+ this.thumbnailClassName +' { width: '+ width +'%; height: 0; padding-bottom: ' + imgHeightInPercentage + '%; background-size: ' + backgroundSize + '%; display:block; background-repeat: no-repeat; margin:0 auto;'
-    /*
-    width: 20%;
-    height: 0;
-    padding-bottom: 20%;
-    background-image: url("images/ourimage.png");
-    background-position: 0 0;
-    background-size: 200%;
-    display:block;
-    */
+	var cssRules = '.'+ this.thumbnailClassName +' { width: '+ 100 +'%; height: 0; padding-bottom: ' + imagePaddingBottomInPercentage + '%; background-size: ' + imageFitSizeInPercentage + '%; display:block; background-repeat: no-repeat; margin:0 auto;'
 	css.innerHTML = cssRules;
 	document.body.appendChild(css);
 };
 
 VideoThumbnail.prototype.displayThumbs = function () {
 	for (var i = 0; i < this.thumbnailDivList.length; ++i) {					//default-thumb-nr
-		var defaultThumbnailNr = this.thumbnailDivList[i].dataset.hasOwnProperty(this.defaultThumbNrName) ? this.thumbnailDivList[i].dataset.defaultnr : 1;
+		var defaultThumbnailNr = this.thumbnailDivList[i].dataset.hasOwnProperty(this.defaultThumbNrName) ? this.thumbnailDivList[i].dataset.defaultimgnr : 1;
 		var defaultBackgroundImg = this.thumbnailDivList[i].dataset.hasOwnProperty('img') ? this.thumbnailDivList[i].dataset.img : 1;
 		this.thumbnailDivList[i].style.backgroundImage = 'url(' + defaultBackgroundImg + ')';
-		var thumbnailMapWidth = this.getThumbnailMapWidthByDivElement(this.thumbnailDivList[i]);
+		
+        var thumbnailMapWidth = 0;
+        var self = this;
+        this.getThumbnailMapWidthByDivElement(this.thumbnailDivList[i], function(imageWidth) { 
+            thumbnailMapWidth = imageWidth;
+            
+            var xPosition = self.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
+            self.setDivBackgroundByPosX(this.thumbnailDivList[i], xPosition); // TODO: hier ist der Fehler!!! this oder self bla
 
+            if (self.isMouseMoveActive) {
+                self.setOnMouseMoveListenerByDivElement(self.thumbnailDivList[i], thumbnailMapWidth);
+                self.setOnMouseOutListenerByDivElement(self.thumbnailDivList[i], thumbnailMapWidth);
+            }
+        });
+        
+        /*
 		var xPosition = this.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
 		this.setDivBackgroundByPosX(this.thumbnailDivList[i], xPosition);
 
 		if (this.isMouseMoveActive) {
 			this.setOnMouseMoveListenerByDivElement(this.thumbnailDivList[i], thumbnailMapWidth);
+            this.setOnMouseOutListenerByDivElement(this.thumbnailDivList[i], thumbnailMapWidth);
 		}
+        */
 	}
 };
 
@@ -83,11 +90,14 @@ VideoThumbnail.prototype.getImageNrByMousePosition = function (thumbnailMapWidth
 	return imageNr;
 };
 
-VideoThumbnail.prototype.getThumbnailMapWidthByDivElement = function (divElem) {
+VideoThumbnail.prototype.getThumbnailMapWidthByDivElement = function (divElem, callback) {
 	var imageSrc = divElem.style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
 	var image = new Image();
-	image.src = imageSrc;
-	return image.width;
+    image.src = imageSrc;
+   
+    image.onload = function(){
+        callback(image.width);
+    };
 };
 
 VideoThumbnail.prototype.setDivBackgroundByPosX = function (divElem, xPosition) {
@@ -101,7 +111,7 @@ VideoThumbnail.prototype.setDivBackgroundByPosX = function (divElem, xPosition) 
 VideoThumbnail.prototype.setOnMouseMoveListenerByDivElement = function (divElem, thumbnailMapWidth) {
 	var self = this;
 	divElem.onmousemove = function (event) {
-		var percentagePos = 2 * (event.offsetX / this.offsetWidth);
+		var percentagePos = (event.offsetX / this.offsetWidth);
 		var curPx = self.getImageNrByMousePosition(thumbnailMapWidth, thumbnailMapWidth / self.maxThumbnailNr, percentagePos);
 		var xPosition = self.getXPositionByDefaultThumbnailNr(curPx);
 		self.setDivBackgroundByPosX(this, xPosition);
@@ -111,16 +121,23 @@ VideoThumbnail.prototype.setOnMouseMoveListenerByDivElement = function (divElem,
 VideoThumbnail.prototype.setOnMouseOutListenerByDivElement = function (divElem, thumbnailMapWidth) {
 	var self = this;
 	divElem.onmouseout = function (event) {
-		var defaultThumbnailNr = this.dataset.hasOwnProperty(self.defaultThumbNrName) ? this.dataset.thumbnail : 0;
+		var defaultThumbnailNr = this.dataset.hasOwnProperty(self.defaultThumbNrName) ? this.dataset.defaultimgnr : 0;
 		var xPosition = self.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
 		self.setDivBackgroundByPosX(this, xPosition);
 	};
 };
 
 VideoThumbnail.prototype.setDivBackgroundImage = function (divElem) {
-	var defaultThumbnailNr = divElem.dataset.hasOwnProperty(self.defaultThumbNrName) ? divElem.dataset.thumbnail : 1;
+	var defaultThumbnailNr = divElem.dataset.hasOwnProperty(self.defaultThumbNrName) ? divElem.dataset.defaultimgnr : 1;
 	var defaultBackgroundImg = divElem.dataset.hasOwnProperty('img') ? divElem.dataset.img : 1;
 	divElem.style.backgroundImage = 'url(' + defaultBackgroundImg + ')';
-	var thumbnailMapWidth = this.getThumbnailMapWidthByDivElement(divElem);
-	this.setDivBackgroundByPosX(divElem, (thumbnailMapWidth - (defaultThumbnailNr * divElem.offsetWidth)));
+    
+    var self = this;
+    var thumbnailMapWidth = 0;
+	this.getThumbnailMapWidthByDivElement(divElem, function(imageWidth) { 
+        thumbnailMapWidth = imageWidth;
+        self.setDivBackgroundByPosX(divElem, (thumbnailMapWidth - (defaultThumbnailNr * divElem.offsetWidth)));
+    });
+    
+	
 };
