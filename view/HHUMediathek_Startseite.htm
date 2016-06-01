@@ -43,10 +43,18 @@
             // configuration
             thumbs.setThumbnailClassName('this-is-spartaaa');
             thumbs.setThumbnailCountOfSprite(6);
-            // CSS: imagePaddingBottomInPercentage and imageFitSizeInPercentage
-            thumbs.setCSS(100, 600);
+            thumbs.imagePaddingBottomInPercentage(100);
             thumbs.setMouseMoveActive();
             thumbs.displayThumbs();
+            
+            // Beispiel 2: fifty-images
+            var thumbsSecondRow = new VideoThumbnail();
+            thumbsSecondRow.setThumbnailClassName('fifty-images');
+            thumbsSecondRow.setThumbnailCountOfSprite(50);
+            // CSS: imagePaddingBottomInPercentage and imageFitSizeInPercentage
+            thumbsSecondRow.imagePaddingBottomInPercentage(43);
+            thumbsSecondRow.setMouseMoveActive();
+            thumbsSecondRow.displayThumbs();
         });
     </script>
 
@@ -338,12 +346,12 @@
                         <div class="panel-video-thumbnail">
                             <a href="#">
                                 <!-- <img src="HHUMediathek_Startseite-Dateien/thumb_001_002.jpg" class="video-thumbnail"> -->
-                                <div class="video-thumbnail2" data-thumbnail="3" data-img="/assets/thumbnails.jpg"></div>
+                                <div class="this-is-spartaaa" data-defaultimgnr="6" data-img="/assets/super-sprite.jpg"></div>
                                 <span class="label label-default video-time">01:25:49</span>
                             </a>
                         </div>
                         <div class="panel-heading panel-video-title">
-                            <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                            <a href="#"><h3 class="video-title">Teste das letzte Bild vom Sprite</h3></a>
                         </div>
                         <div class="dropdown panel-video-menu">
                             <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -370,13 +378,12 @@
                     <div class="panel panel-video">
                         <div class="panel-video-thumbnail">
                             <a href="#">
-                                <div class="video-thumbnail2" data-thumbnail="4" data-img="/assets/thumbnails.jpg"></div>
-                                <!--<img src="HHUMediathek_Startseite-Dateien/thumb_000_003.jpg" class="video-thumbnail">-->
+                                <div class="this-is-spartaaa" data-defaultimgnr="4" data-img="/assets/super-sprite.jpg"></div>
                                 <span class="label label-default video-time">01:25:49</span>
                             </a>
                         </div>
                         <div class="panel-heading panel-video-title">
-                            <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                            <a href="#"><h3 class="video-title">Abschließendes bild!</h3></a>
                         </div>
                         <div class="dropdown panel-video-menu">
                             <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -403,13 +410,12 @@
                     <div class="panel panel-video">
                         <div class="panel-video-thumbnail">
                             <a href="#">
-                                <!-- <img src="HHUMediathek_Startseite-Dateien/thumb_002.jpg" class="video-thumbnail"> -->
-                                <div class="video-thumbnail2" data-thumbnail="1" data-img="/assets/thumbnails2.jpg"></div>
-                                <span class="label label-default video-time">01:25:49</span>
+                                <div class="fifty-images" data-defaultimgnr="3" data-img="/assets/sprite-50-images.png"></div>
+                                <span class="label label-default video-time">00:38:09</span>
                             </a>
                         </div>
                         <div class="panel-heading panel-video-title">
-                            <a href="#"><h3 class="video-title">Freiheit und Journalismus</h3></a>
+                            <a href="#"><h3 class="video-title">Sprite mit 50 Bildern</h3></a>
                         </div>
                         <div class="dropdown panel-video-menu">
                             <a href="#" class="dropdown-toggle dropdown-video-options" data-toggle="dropdown" role="button" aria-expanded="false">

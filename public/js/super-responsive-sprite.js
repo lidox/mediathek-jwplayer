@@ -5,6 +5,7 @@ function VideoThumbnail() {
 	this.maxThumbnailNr = 0;
 	this.isMouseMoveActive = false;
 	this.defaultThumbNrName = 'defaultimgnr';
+    this.imageFitSize = 100;
 }
 
 VideoThumbnail.prototype.setThumbnailClassName = function (thumbnailClassName) {
@@ -14,12 +15,13 @@ VideoThumbnail.prototype.setThumbnailClassName = function (thumbnailClassName) {
 
 VideoThumbnail.prototype.setThumbnailCountOfSprite = function (thumbnailCountOfSprite) {
 	this.maxThumbnailNr = thumbnailCountOfSprite;
+    this.imageFitSize = thumbnailCountOfSprite * 100;
 };
 
-VideoThumbnail.prototype.setCSS = function (imagePaddingBottomInPercentage, imageFitSizeInPercentage) {
+VideoThumbnail.prototype.imagePaddingBottomInPercentage = function (imagePaddingBottomInPercentage, imageFitSizeInPercentage) {
 	var css = document.createElement("style");
 	css.type = "text/css";
-	var cssRules = '.'+ this.thumbnailClassName +' { width: '+ 100 +'%; height: 0; padding-bottom: ' + imagePaddingBottomInPercentage + '%; background-size: ' + imageFitSizeInPercentage + '%; display:block; background-repeat: no-repeat; margin:0 auto;'
+	var cssRules = '.'+ this.thumbnailClassName +' { width: '+ 100 +'%; height: 0; padding-bottom: ' + imagePaddingBottomInPercentage + '%; background-size: ' + this.imageFitSize + '%; display:block; background-repeat: no-repeat; margin:0 auto;'
 	css.innerHTML = cssRules;
 	document.body.appendChild(css);
 };
