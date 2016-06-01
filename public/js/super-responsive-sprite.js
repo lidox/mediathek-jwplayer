@@ -32,27 +32,18 @@ VideoThumbnail.prototype.displayThumbs = function () {
 		
         var thumbnailMapWidth = 0;
         var self = this;
+        var divItem = this.thumbnailDivList[i];
         this.getThumbnailMapWidthByDivElement(this.thumbnailDivList[i], function(imageWidth) { 
             thumbnailMapWidth = imageWidth;
             
             var xPosition = self.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
-            self.setDivBackgroundByPosX(this.thumbnailDivList[i], xPosition); // TODO: hier ist der Fehler!!! this oder self bla
+            self.setDivBackgroundByPosX(divItem, xPosition); // TODO: hier ist der Fehler!!! this oder self bla
 
             if (self.isMouseMoveActive) {
-                self.setOnMouseMoveListenerByDivElement(self.thumbnailDivList[i], thumbnailMapWidth);
-                self.setOnMouseOutListenerByDivElement(self.thumbnailDivList[i], thumbnailMapWidth);
+                self.setOnMouseMoveListenerByDivElement(divItem, thumbnailMapWidth);
+                self.setOnMouseOutListenerByDivElement(divItem, thumbnailMapWidth);
             }
         });
-        
-        /*
-		var xPosition = this.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
-		this.setDivBackgroundByPosX(this.thumbnailDivList[i], xPosition);
-
-		if (this.isMouseMoveActive) {
-			this.setOnMouseMoveListenerByDivElement(this.thumbnailDivList[i], thumbnailMapWidth);
-            this.setOnMouseOutListenerByDivElement(this.thumbnailDivList[i], thumbnailMapWidth);
-		}
-        */
 	}
 };
 
