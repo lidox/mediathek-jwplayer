@@ -24,29 +24,6 @@ VideoThumbnail.prototype.setCSS = function (imagePaddingBottomInPercentage, imag
 	document.body.appendChild(css);
 };
 
-VideoThumbnail.prototype.displayThumbs = function () {
-	for (var i = 0; i < this.thumbnailDivList.length; ++i) {					//default-thumb-nr
-		var defaultThumbnailNr = this.thumbnailDivList[i].dataset.hasOwnProperty(this.defaultThumbNrName) ? this.thumbnailDivList[i].dataset.defaultimgnr : 1;
-		var defaultBackgroundImg = this.thumbnailDivList[i].dataset.hasOwnProperty('img') ? this.thumbnailDivList[i].dataset.img : 1;
-		this.thumbnailDivList[i].style.backgroundImage = 'url(' + defaultBackgroundImg + ')';
-		
-        var thumbnailMapWidth = 0;
-        var self = this;
-        var divItem = this.thumbnailDivList[i];
-        this.getThumbnailMapWidthByDivElement(this.thumbnailDivList[i], function(imageWidth) { 
-            thumbnailMapWidth = imageWidth;
-            
-            var xPosition = self.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
-            self.setDivBackgroundByPosX(divItem, xPosition); // TODO: hier ist der Fehler!!! this oder self bla
-
-            if (self.isMouseMoveActive) {
-                self.setOnMouseMoveListenerByDivElement(divItem, thumbnailMapWidth);
-                self.setOnMouseOutListenerByDivElement(divItem, thumbnailMapWidth);
-            }
-        });
-	}
-};
-
 VideoThumbnail.prototype.setMouseMoveActive = function () {
 	this.isMouseMoveActive = true;
 };
@@ -79,16 +56,6 @@ VideoThumbnail.prototype.getImageNrByMousePosition = function (thumbnailMapWidth
 	}
 	imageNr += 1;
 	return imageNr;
-};
-
-VideoThumbnail.prototype.getThumbnailMapWidthByDivElement = function (divElem, callback) {
-	var imageSrc = divElem.style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
-	var image = new Image();
-    image.src = imageSrc;
-   
-    image.onload = function(){
-        callback(image.width);
-    };
 };
 
 VideoThumbnail.prototype.setDivBackgroundByPosX = function (divElem, xPosition) {
@@ -131,4 +98,37 @@ VideoThumbnail.prototype.setDivBackgroundImage = function (divElem) {
     });
     
 	
+};
+
+VideoThumbnail.prototype.displayThumbs = function () {
+	for (var i = 0; i < this.thumbnailDivList.length; ++i) {
+		var defaultThumbnailNr = this.thumbnailDivList[i].dataset.hasOwnProperty(this.defaultThumbNrName) ? this.thumbnailDivList[i].dataset.defaultimgnr : 1;
+		var defaultBackgroundImg = this.thumbnailDivList[i].dataset.hasOwnProperty('img') ? this.thumbnailDivList[i].dataset.img : 1;
+		this.thumbnailDivList[i].style.backgroundImage = 'url(' + defaultBackgroundImg + ')';
+		
+        var thumbnailMapWidth = 0;
+        var self = this;
+        var divItem = this.thumbnailDivList[i];
+        this.getThumbnailMapWidthByDivElement(divItem, defaultThumbnailNr, function(imageWidth, divElem, defaultThumbNr) { 
+            thumbnailMapWidth = imageWidth;
+            divItem = divElem;
+            defaultThumbnailNr = defaultThumbNr;
+            var xPosition = self.getXPositionByDefaultThumbnailNr(defaultThumbnailNr);
+            self.setDivBackgroundByPosX(divItem, xPosition);
+            if (self.isMouseMoveActive) {
+                self.setOnMouseMoveListenerByDivElement(divItem, thumbnailMapWidth);
+                self.setOnMouseOutListenerByDivElement(divItem, thumbnailMapWidth);
+            }
+        });
+	}
+};
+
+VideoThumbnail.prototype.getThumbnailMapWidthByDivElement = function (divElem, defaultThumbnailNr, callback) {
+	var imageSrc = divElem.style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
+	var image = new Image();
+    image.src = imageSrc;
+   
+    image.onload = function(){
+        callback(image.width, divElem, defaultThumbnailNr);
+    };
 };
